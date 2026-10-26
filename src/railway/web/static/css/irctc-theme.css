@@ -1,0 +1,2171 @@
+/* ==========================================================================
+   AUTHENTIC IRCTC NEXT GENERATION e-TICKETING PORTAL - OFFICIAL THEME
+   Palette: IRCTC Deep Navy (#213d77), Saffron Orange (#fb792b), Gold (#f5a623)
+   ========================================================================== */
+
+:root {
+    --irctc-navy: #213d77;
+    --irctc-navy-dark: #172b53;
+    --irctc-navy-light: #2c529e;
+    --irctc-orange: #fb792b;
+    --irctc-orange-hover: #e06318;
+    --irctc-gold: #f5a623;
+    --irctc-bg: #f3f5f8;
+    --irctc-card: #ffffff;
+    --irctc-border: #dcdfe6;
+    --irctc-text: #222222;
+    --irctc-text-muted: #5e6d82;
+    --irctc-green: #0f8a3c;
+    --irctc-green-bg: #e8f5e9;
+    --irctc-red: #d32f2f;
+    --irctc-red-bg: #ffebee;
+    --irctc-amber: #e65100;
+    --irctc-amber-bg: #fff3e0;
+    --irctc-blue: #0277bd;
+    --irctc-blue-bg: #e1f5fe;
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.14);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--irctc-bg);
+    color: var(--irctc-text);
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.irctc-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 16px;
+    width: 100%;
+}
+
+/* ==========================================================================
+   TOP UTILITY & CRIS HEADER
+   ========================================================================== */
+.super-header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 12px;
+    color: #444;
+    padding: 6px 0;
+}
+
+.super-header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.gov-logos {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.emblem-img {
+    height: 28px;
+    width: auto;
+}
+
+.gov-text {
+    font-weight: 700;
+    color: var(--irctc-navy);
+    letter-spacing: 0.3px;
+}
+
+.clock-and-tools {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.ist-clock {
+    background: #eef2f8;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-weight: 700;
+    color: var(--irctc-navy);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    border: 1px solid #d0d7e5;
+}
+
+.top-nav-links a {
+    color: #555;
+    text-decoration: none;
+    margin-left: 12px;
+    font-weight: 500;
+}
+
+.top-nav-links a:hover {
+    color: var(--irctc-orange);
+}
+
+/* ==========================================================================
+   MAIN IRCTC HEADER
+   ========================================================================== */
+.irctc-main-header {
+    background-color: #ffffff;
+    padding: 12px 0;
+    border-bottom: 2px solid var(--irctc-orange);
+}
+
+.main-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.irctc-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+}
+
+.irctc-logo-badge {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--irctc-navy) 0%, var(--irctc-navy-light) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 26px;
+    box-shadow: 0 2px 6px rgba(33, 61, 119, 0.3);
+    border: 2px solid var(--irctc-gold);
+}
+
+.brand-details h1 {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--irctc-navy);
+    letter-spacing: -0.2px;
+    line-height: 1.2;
+}
+
+.brand-details p {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--irctc-orange);
+}
+
+.header-badges {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.swarm-live-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #e8f5e9;
+    color: #1b5e20;
+    border: 1px solid #a5d6a7;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.swarm-live-pill:hover {
+    background: #c8e6c9;
+}
+
+.radar-pulse {
+    width: 10px;
+    height: 10px;
+    background-color: #2e7d32;
+    border-radius: 50%;
+    position: relative;
+}
+
+.radar-pulse::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    border: 2px solid #2e7d32;
+    animation: radar-ping 1.6s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes radar-ping {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(2.8); opacity: 0; }
+}
+
+.cdap-pill {
+    background: #ede7f6;
+    color: #4527a0;
+    border: 1px solid #d1c4e9;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   IRCTC PRIMARY NAVIGATION BAR (NAVY BLUE)
+   ========================================================================== */
+.irctc-navbar {
+    background: linear-gradient(90deg, var(--irctc-navy) 0%, var(--irctc-navy-dark) 100%);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.irctc-nav-list {
+    display: flex;
+    list-style: none;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.irctc-nav-list::-webkit-scrollbar {
+    display: none;
+}
+
+.nav-item-btn {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 14px 18px;
+    cursor: pointer;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s, color 0.2s;
+    border-bottom: 3px solid transparent;
+}
+
+.nav-item-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--irctc-gold);
+}
+
+.nav-item-btn.active {
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    border-bottom: 3px solid var(--irctc-orange);
+}
+
+.nav-item-btn.highlight-tatkal {
+    background: var(--irctc-orange);
+    color: #ffffff;
+    border-radius: 4px;
+    margin: 6px 8px;
+    padding: 8px 14px;
+}
+
+.nav-item-btn.highlight-tatkal:hover {
+    background: var(--irctc-orange-hover);
+}
+
+/* ==========================================================================
+   TICKER / RUNNING BANNER
+   ========================================================================== */
+.irctc-ticker-bar {
+    background-color: #fff9e6;
+    border-bottom: 1px solid #ffe082;
+    padding: 8px 0;
+    font-size: 12px;
+}
+
+.ticker-inner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.ticker-label {
+    background: var(--irctc-orange);
+    color: #ffffff;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.ticker-marquee {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.ticker-text {
+    display: inline-block;
+    color: #333;
+    font-weight: 600;
+    animation: marquee-scroll 28s linear infinite;
+}
+
+@keyframes marquee-scroll {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+/* ==========================================================================
+   HERO DASHBOARD LAYOUT (BOOK TICKET + AI SWARM)
+   ========================================================================== */
+.hero-dashboard {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+@media (max-width: 960px) {
+    .hero-dashboard {
+        grid-template-columns: 1fr;
+    }
+}
+
+.card {
+    background: var(--irctc-card);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--irctc-border);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+
+.card-header-irctc {
+    background: linear-gradient(90deg, var(--irctc-navy) 0%, var(--irctc-navy-light) 100%);
+    color: #ffffff;
+    padding: 12px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-header-irctc h2 {
+    font-size: 16px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.card-header-orange {
+    background: linear-gradient(90deg, #d35400 0%, var(--irctc-orange) 100%);
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* ==========================================================================
+   BOOK TICKET FORM
+   ========================================================================== */
+.booking-form-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.route-selection-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 12px;
+}
+
+.input-block {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.input-block label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--irctc-navy);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.station-input-wrap {
+    position: relative;
+}
+
+.station-input-wrap input,
+.input-block select,
+.input-block input[type="date"] {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #c0c4cc;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--irctc-text);
+    background-color: #fafafa;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.station-input-wrap input:focus,
+.input-block select:focus,
+.input-block input[type="date"]:focus {
+    border-color: var(--irctc-orange);
+    background-color: #ffffff;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(251, 121, 43, 0.2);
+}
+
+.swap-btn-irctc {
+    background-color: #ffffff;
+    border: 1px solid #c0c4cc;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--irctc-navy);
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: var(--shadow-sm);
+    margin-top: 20px;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.swap-btn-irctc:hover {
+    transform: rotate(180deg);
+    background-color: #eef2f8;
+    color: var(--irctc-orange);
+}
+
+.popular-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.chip-btn {
+    background: #eef2f8;
+    border: 1px solid #d0d7e5;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--irctc-navy);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.chip-btn:hover {
+    background: var(--irctc-navy);
+    color: #ffffff;
+}
+
+.date-class-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.quota-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.checkbox-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #444;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.btn-search-irctc {
+    background: linear-gradient(90deg, #f57c00 0%, var(--irctc-orange) 100%);
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 3px 6px rgba(251, 121, 43, 0.35);
+    transition: transform 0.15s, box-shadow 0.15s;
+    margin-top: 6px;
+}
+
+.btn-search-irctc:hover {
+    background: linear-gradient(90deg, #e65100 0%, #f57c00 100%);
+    box-shadow: 0 4px 10px rgba(251, 121, 43, 0.45);
+    transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   AI PASSENGER SWARM STATION & LIVE TICKER
+   ========================================================================== */
+.swarm-panel {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.swarm-control-bar {
+    background: #fff8f2;
+    border: 1px solid #ffd8be;
+    border-radius: var(--radius-sm);
+    padding: 12px;
+    margin-bottom: 14px;
+}
+
+.swarm-modes {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.swarm-mode-btn {
+    flex: 1;
+    background: #ffffff;
+    border: 1px solid #e0c8b0;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+    color: #555;
+}
+
+.swarm-mode-btn.active {
+    background: var(--irctc-orange);
+    color: #ffffff;
+    border-color: var(--irctc-orange);
+}
+
+.btn-instant-rush {
+    width: 100%;
+    background: linear-gradient(135deg, #e65100 0%, #b71c1c 100%);
+    color: #ffffff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+    box-shadow: 0 2px 8px rgba(183, 28, 28, 0.3);
+    transition: all 0.15s;
+}
+
+.btn-instant-rush:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(183, 28, 28, 0.45);
+}
+
+.feed-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.feed-title {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--irctc-navy);
+    text-transform: uppercase;
+}
+
+.live-feed-box {
+    background: #1e222d;
+    border-radius: var(--radius-sm);
+    padding: 12px;
+    height: 290px;
+    overflow-y: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border: 1px solid #333a4d;
+}
+
+.feed-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-left: 3px solid #78909c;
+    padding: 6px 8px;
+    border-radius: 2px;
+    line-height: 1.4;
+    animation: feed-slide-in 0.3s ease-out;
+}
+
+@keyframes feed-slide-in {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.feed-item.confirmed {
+    border-left-color: #4caf50;
+    background: rgba(76, 175, 80, 0.1);
+}
+
+.feed-item.waiting {
+    border-left-color: #ff9800;
+    background: rgba(255, 152, 0, 0.1);
+}
+
+.feed-item.cancelled {
+    border-left-color: #2196f3;
+    background: rgba(33, 150, 243, 0.1);
+}
+
+.feed-item.rush {
+    border-left-color: #e91e63;
+    background: rgba(233, 30, 99, 0.15);
+}
+
+.feed-time {
+    color: #90a4ae;
+    font-weight: 700;
+    margin-right: 6px;
+}
+
+.feed-bot {
+    color: #ffca28;
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   TRAIN SEARCH RESULTS SECTION
+   ========================================================================== */
+.train-results-wrap {
+    margin: 20px 0;
+}
+
+.results-meta-bar {
+    background: #ffffff;
+    border: 1px solid var(--irctc-border);
+    border-radius: var(--radius-sm);
+    padding: 12px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.route-info-heading {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--irctc-navy);
+}
+
+.filter-sort-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+}
+
+.trains-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* IRCTC TRAIN CARD */
+.irctc-train-card {
+    background: #ffffff;
+    border-radius: var(--radius-sm);
+    border: 1px solid #dcdfe6;
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.irctc-train-card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.train-header-row {
+    background: #f4f6fa;
+    border-bottom: 1px solid #e4e7ed;
+    padding: 10px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.train-title-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.train-name-tag {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--irctc-navy);
+}
+
+.runs-on-days {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.runs-on-days .day {
+    width: 18px;
+    height: 18px;
+    border-radius: 3px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #e0e0e0;
+    color: #666;
+}
+
+.runs-on-days .day.active {
+    background: #2e7d32;
+    color: #ffffff;
+}
+
+.train-schedule-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 18px;
+    align-items: center;
+    border-bottom: 1px solid #f0f2f5;
+}
+
+.sched-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.sched-col.right {
+    text-align: right;
+}
+
+.sched-col.center {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.time-val {
+    font-size: 20px;
+    font-weight: 800;
+    color: #111;
+}
+
+.station-val {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--irctc-text-muted);
+}
+
+.duration-line {
+    font-size: 12px;
+    color: #666;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 4px;
+}
+
+.track-line {
+    width: 120px;
+    height: 2px;
+    background: #bbb;
+    position: relative;
+    margin: 4px auto;
+}
+
+.track-line::before, .track-line::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--irctc-navy);
+    top: -2px;
+}
+
+.track-line::before { left: 0; }
+.track-line::after { right: 0; }
+
+/* SIGNATURE IRCTC CLASS BOXES */
+.class-boxes-row {
+    padding: 14px 18px;
+    background: #fafbfc;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+.class-card {
+    background: #ffffff;
+    border: 1px solid #c0c4cc;
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    min-width: 150px;
+    cursor: pointer;
+    transition: all 0.15s;
+    position: relative;
+}
+
+.class-card:hover {
+    border-color: var(--irctc-navy);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.class-card.selected {
+    border-color: var(--irctc-navy);
+    background: #f0f4fc;
+    box-shadow: 0 0 0 2px var(--irctc-navy);
+}
+
+.class-top-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.class-code {
+    font-weight: 800;
+    font-size: 13px;
+    color: var(--irctc-navy);
+}
+
+.class-fare {
+    font-weight: 800;
+    font-size: 13px;
+    color: #111;
+}
+
+.avail-status-pill {
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 800;
+    text-align: center;
+}
+
+.avail-status-pill.available {
+    background: var(--irctc-green-bg);
+    color: var(--irctc-green);
+    border: 1px solid #a5d6a7;
+}
+
+.avail-status-pill.waiting {
+    background: var(--irctc-amber-bg);
+    color: var(--irctc-amber);
+    border: 1px solid #ffcc80;
+}
+
+.card-actions-row {
+    display: flex;
+    gap: 10px;
+    margin-left: auto;
+}
+
+.btn-book-class {
+    background: var(--irctc-orange);
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.btn-book-class:hover {
+    background: var(--irctc-orange-hover);
+}
+
+.btn-card-rush {
+    background: #fee2e2;
+    color: #b91c1c;
+    border: 1px solid #fca5a5;
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-card-rush:hover {
+    background: #fecaca;
+}
+
+/* ==========================================================================
+   AUTHENTIC IRCTC ELECTRONIC RESERVATION SLIP (ERS)
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.modal-overlay.hidden {
+    display: none !important;
+}
+
+.ers-ticket-container {
+    background: #ffffff;
+    max-width: 780px;
+    width: 100%;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    border: 2px solid var(--irctc-navy);
+    overflow: hidden;
+    position: relative;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.ers-header {
+    background: var(--irctc-navy);
+    color: #ffffff;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ers-body {
+    padding: 24px;
+    overflow-y: auto;
+    background-color: #fff;
+    background-image: radial-gradient(#213d77 0.75px, transparent 0.75px);
+    background-size: 24px 24px;
+    background-position: 0 0;
+}
+
+.ers-watermark-stamp {
+    border: 2px dashed #90a4ae;
+    border-radius: var(--radius-md);
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.94);
+}
+
+.ers-top-meta {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--irctc-navy);
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+}
+
+.pnr-box {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--irctc-navy);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.ers-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 13px;
+}
+
+.ers-table th, .ers-table td {
+    border: 1px solid #d0d7e5;
+    padding: 8px 10px;
+    text-align: left;
+}
+
+.ers-table th {
+    background-color: #eef2f8;
+    color: var(--irctc-navy);
+    font-weight: 700;
+}
+
+.ers-footer-actions {
+    background: #f4f6fa;
+    padding: 14px 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    border-top: 1px solid #dcdfe6;
+}
+
+/* ==========================================================================
+   ASK DISHA 2.0 FLOATING AI CHATBOT
+   ========================================================================== */
+.disha-floating-trigger {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: linear-gradient(135deg, var(--irctc-orange) 0%, #e65100 100%);
+    color: #ffffff;
+    border-radius: 50px;
+    padding: 10px 18px 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 6px 18px rgba(230, 81, 0, 0.45);
+    cursor: pointer;
+    z-index: 990;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 2px solid #ffffff;
+}
+
+.disha-floating-trigger:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 24px rgba(230, 81, 0, 0.55);
+}
+
+.disha-avatar-bubble {
+    width: 40px;
+    height: 40px;
+    background: #ffffff;
+    color: var(--irctc-navy);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.disha-trigger-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.disha-title {
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+.disha-subtitle {
+    font-size: 10px;
+    opacity: 0.9;
+}
+
+/* DISHA CHAT WINDOW */
+.disha-chat-dialog {
+    position: fixed;
+    bottom: 84px;
+    right: 24px;
+    width: 380px;
+    height: 520px;
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.22);
+    border: 1px solid #d0d7e5;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 995;
+    animation: chat-popup 0.25s ease-out;
+}
+
+.disha-chat-dialog.hidden {
+    display: none !important;
+}
+
+@keyframes chat-popup {
+    from { opacity: 0; transform: translateY(16px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.disha-chat-header {
+    background: linear-gradient(135deg, var(--irctc-navy) 0%, var(--irctc-navy-light) 100%);
+    color: #ffffff;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.disha-header-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.disha-close-btn {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.disha-messages-area {
+    flex: 1;
+    padding: 14px;
+    overflow-y: auto;
+    background: #f8f9fc;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.disha-msg {
+    max-width: 85%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.disha-msg.bot {
+    background: #ffffff;
+    color: #222;
+    border-bottom-left-radius: 2px;
+    border: 1px solid #e0e5ed;
+    box-shadow: var(--shadow-sm);
+    align-self: flex-start;
+}
+
+.disha-msg.user {
+    background: var(--irctc-navy);
+    color: #ffffff;
+    border-bottom-right-radius: 2px;
+    align-self: flex-end;
+}
+
+.disha-suggestions-row {
+    padding: 8px 12px;
+    background: #ffffff;
+    border-top: 1px solid #edf0f5;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.disha-pill-btn {
+    background: #eef2f8;
+    color: var(--irctc-navy);
+    border: 1px solid #d0d7e5;
+    padding: 4px 10px;
+    border-radius: 14px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.disha-pill-btn:hover {
+    background: var(--irctc-orange);
+    color: #ffffff;
+    border-color: var(--irctc-orange);
+}
+
+.disha-input-row {
+    padding: 10px 14px;
+    background: #ffffff;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.disha-input-row input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #dcdfe6;
+    border-radius: 20px;
+    font-size: 13px;
+    outline: none;
+}
+
+.disha-input-row input:focus {
+    border-color: var(--irctc-orange);
+}
+
+.disha-send-btn {
+    background: var(--irctc-orange);
+    color: #ffffff;
+    border: none;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+/* Toast */
+.irctc-toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #323232;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    z-index: 2000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    animation: toast-in 0.3s ease;
+}
+
+@keyframes toast-in {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Utility tab panel display */
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+/* Tatkal High Concurrency Visual Surge */
+.tatkal-pulsing {
+    animation: tatkal-flash 0.6s ease-in-out infinite alternate !important;
+}
+
+@keyframes tatkal-flash {
+    0% {
+        border-color: #fb792b;
+        box-shadow: 0 0 10px rgba(251, 121, 43, 0.5);
+        transform: scale(1.002);
+    }
+    100% {
+        border-color: #d32f2f;
+        box-shadow: 0 0 20px rgba(211, 47, 47, 0.85);
+        transform: scale(1.012);
+    }
+}
+
+/* ==========================================================================
+   NEXT-GENERATION 3D UI/UX & INTERACTIVE ANIMATIONS
+   ========================================================================== */
+
+/* Audio Toggle Button in Super-Header */
+.audio-toggle-btn {
+    background: #eef2f8;
+    color: var(--irctc-navy);
+    border: 1px solid #c0c4cc;
+    border-radius: 12px;
+    padding: 2px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.audio-toggle-btn:hover {
+    background: var(--irctc-navy);
+    color: #fff;
+    border-color: var(--irctc-navy);
+}
+
+.audio-toggle-btn.muted {
+    background: #ffebee;
+    color: #d32f2f;
+    border-color: #ffcdd2;
+}
+
+/* 1. 3D LIVE RAILWAY DIORAMA */
+.rail-3d-wrapper {
+    margin-bottom: 20px;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(180deg, #101d36 0%, #172b53 100%);
+    color: #ffffff;
+    box-shadow: 0 8px 30px rgba(16, 29, 54, 0.25);
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.rail-3d-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 18px;
+    background: rgba(0, 0, 0, 0.25);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.rail-3d-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rail-3d-title h3 {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: #ffffff;
+    margin: 0;
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #00e676;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #00e676;
+    animation: pulse-ring 1.5s infinite;
+}
+
+@keyframes pulse-ring {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.7); }
+    70% { transform: scale(1.1); box-shadow: 0 0 0 6px rgba(0, 230, 118, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 230, 118, 0); }
+}
+
+.badge-3d {
+    background: linear-gradient(90deg, #fb792b, #f5a623);
+    color: #ffffff;
+    font-size: 9.5px;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.rail-3d-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ctrl-btn-3d {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.ctrl-btn-3d:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: #ffffff;
+}
+
+.ctrl-btn-3d.active {
+    background: var(--irctc-orange);
+    border-color: var(--irctc-orange);
+    color: #ffffff;
+    box-shadow: 0 0 8px rgba(251, 121, 43, 0.5);
+}
+
+.btn-rush-spark {
+    background: linear-gradient(90deg, #d32f2f, #fb792b);
+    border: none;
+    font-weight: 700;
+    animation: spark-glow 1.2s infinite alternate;
+}
+
+@keyframes spark-glow {
+    0% { box-shadow: 0 0 4px rgba(211, 47, 47, 0.4); }
+    100% { box-shadow: 0 0 12px rgba(251, 121, 43, 0.9); }
+}
+
+.rail-3d-viewport {
+    width: 100%;
+    height: 250px;
+    position: relative;
+    cursor: grab;
+    overflow: hidden;
+    background: radial-gradient(circle at 50% 30%, #1b3566 0%, #0a1324 100%);
+}
+
+.rail-3d-viewport:active {
+    cursor: grabbing;
+}
+
+#railway-3d-canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+}
+
+.rail-3d-overlay-info {
+    position: absolute;
+    bottom: 8px;
+    left: 12px;
+    right: 12px;
+    background: rgba(16, 29, 54, 0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 11.5px;
+    color: #e0e6ed;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    pointer-events: none;
+}
+
+/* 2. 3D COACH BERTH VISUALIZER MODAL */
+.coach-3d-container {
+    background: #ffffff;
+    width: 100%;
+    max-width: 880px;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    animation: modal-pop 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+.coach-3d-header {
+    background: linear-gradient(135deg, var(--irctc-navy) 0%, var(--irctc-navy-dark) 100%);
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--irctc-orange);
+}
+
+.coach-3d-body {
+    padding: 16px 20px;
+    background: #f7f9fc;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.coach-3d-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.coach-tabs {
+    display: flex;
+    gap: 6px;
+    background: #eef2f8;
+    padding: 3px;
+    border-radius: 6px;
+}
+
+.coach-tab-btn {
+    border: none;
+    background: transparent;
+    padding: 6px 12px;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--irctc-navy);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.coach-tab-btn.active {
+    background: var(--irctc-navy);
+    color: #ffffff;
+    box-shadow: 0 2px 6px rgba(33, 61, 119, 0.25);
+}
+
+.coach-legend {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #555;
+    font-weight: 600;
+}
+
+.legend-swatch {
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+.legend-swatch.available { background: #0f8a3c; box-shadow: 0 0 4px rgba(15, 138, 60, 0.4); }
+.legend-swatch.ai-booked { background: #d32f2f; }
+.legend-swatch.tatkal-booked { background: #fb792b; box-shadow: 0 0 4px rgba(251, 121, 43, 0.5); }
+.legend-swatch.senior-booked { background: #7b1fa2; }
+
+/* 3D Perspective Stage for Berths */
+.compartment-3d-stage {
+    perspective: 1000px;
+    background: #ffffff;
+    border: 1px solid #dcdfe6;
+    border-radius: 10px;
+    padding: 20px;
+    min-height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: auto;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.compartment-isometric-grid {
+    display: flex;
+    gap: 18px;
+    transform: rotateX(20deg) rotateZ(-6deg);
+    transform-style: preserve-3d;
+    transition: transform 0.4s ease;
+    padding: 15px 10px;
+}
+
+.compartment-isometric-grid:hover {
+    transform: rotateX(10deg) rotateZ(0deg);
+}
+
+/* Individual 3D Compartment Bay */
+.coach-bay {
+    background: #f0f4f9;
+    border: 1px solid #c7d2e3;
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transform-style: preserve-3d;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.bay-title {
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--irctc-navy);
+    text-align: center;
+    border-bottom: 1px solid #dce4ef;
+    padding-bottom: 4px;
+}
+
+.bay-berths-row {
+    display: flex;
+    gap: 12px;
+    transform-style: preserve-3d;
+}
+
+.berth-column {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transform-style: preserve-3d;
+}
+
+.berth-box-3d {
+    width: 58px;
+    height: 38px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: all 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.berth-box-3d:hover {
+    transform: translateZ(12px) scale(1.08);
+    z-index: 100;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+}
+
+.berth-box-3d.avail {
+    background: linear-gradient(135deg, #139c44 0%, #0b692d 100%);
+    border: 1px solid #20b857;
+}
+
+.berth-box-3d.ai-res {
+    background: linear-gradient(135deg, #e53935 0%, #b71c1c 100%);
+    border: 1px solid #ef5350;
+}
+
+.berth-box-3d.tatkal-res {
+    background: linear-gradient(135deg, #fb8c00 0%, #e65100 100%);
+    border: 1px solid #ffb74d;
+    animation: tatkal-seat-pulse 2s infinite alternate;
+}
+
+@keyframes tatkal-seat-pulse {
+    0% { box-shadow: 0 2px 6px rgba(251, 140, 0, 0.4); }
+    100% { box-shadow: 0 0 12px rgba(255, 183, 77, 0.85); }
+}
+
+.berth-box-3d.senior-res {
+    background: linear-gradient(135deg, #8e24aa 0%, #4a148c 100%);
+    border: 1px solid #ba68c8;
+}
+
+.berth-lbl {
+    font-size: 8px;
+    opacity: 0.85;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.coach-stats-footer {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #ffffff;
+    border: 1px solid #dcdfe6;
+    border-radius: 8px;
+    padding: 10px 16px;
+    flex-wrap: wrap;
+}
+
+.coach-stat-box {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+}
+
+.coach-stat-box .stat-lbl {
+    color: #666;
+    font-weight: 600;
+}
+
+.coach-stat-box .stat-val {
+    font-weight: 800;
+    color: var(--irctc-navy);
+}
+
+/* 3. 3D HOLOGRAPHIC FLIP TICKET (ERS) */
+.ers-ticket-3d-scene {
+    perspective: 1500px;
+    width: 100%;
+    max-width: 620px;
+    margin: 0 auto;
+}
+
+.ers-ticket-3d-card {
+    position: relative;
+    width: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.ers-ticket-3d-card.flipped {
+    transform: rotateY(180deg);
+}
+
+.ers-card-face {
+    width: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.ers-card-front {
+    transform: rotateY(0deg);
+}
+
+.ers-card-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+}
+
+.hologram-seal {
+    background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(245,166,35,0.8) 25%, rgba(0,188,212,0.8) 50%, rgba(233,30,99,0.8) 75%, rgba(255,255,255,0.4) 100%);
+    background-size: 200% 200%;
+    animation: hologram-shimmer 3s ease infinite;
+    border-radius: 4px;
+    padding: 3px 8px;
+    font-size: 9.5px;
+    font-weight: 800;
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    letter-spacing: 0.5px;
+}
+
+@keyframes hologram-shimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.btn-3d-flip {
+    background: #f0f4f9;
+    color: var(--irctc-navy);
+    border: 1px solid #c7d2e3;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-3d-flip:hover {
+    background: var(--irctc-navy);
+    color: #ffffff;
+    border-color: var(--irctc-navy);
+    box-shadow: 0 2px 8px rgba(33, 61, 119, 0.3);
+}
+
+.ers-back-content {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.ers-barcode-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8fafc;
+    border: 1px dashed #c0c4cc;
+    border-radius: 6px;
+    padding: 12px 18px;
+}
+
+.barcode-3d-strip {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.barcode-lines {
+    height: 38px;
+    width: 220px;
+    background: repeating-linear-gradient(
+        90deg,
+        #111 0px,
+        #111 2px,
+        transparent 2px,
+        transparent 4px,
+        #111 4px,
+        #111 7px,
+        transparent 7px,
+        transparent 10px,
+        #111 10px,
+        #111 14px,
+        transparent 14px,
+        transparent 16px
+    );
+}
+
+.barcode-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    color: #333;
+}
+
+.qr-mock-box {
+    width: 58px;
+    height: 58px;
+    border: 2px solid #222;
+    padding: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+}
+
+.qr-pattern {
+    width: 44px;
+    height: 44px;
+    background: 
+        linear-gradient(45deg, #000 25%, transparent 25%), 
+        linear-gradient(-45deg, #000 25%, transparent 25%), 
+        linear-gradient(45deg, transparent 75%, #000 75%), 
+        linear-gradient(-45deg, transparent 75%, #000 75%);
+    background-size: 8px 8px;
+    background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
+}
+
+.ers-back-terms h4 {
+    font-size: 12px;
+    color: var(--irctc-navy);
+    margin-bottom: 6px;
+    font-weight: 800;
+}
+
+.ers-back-terms ul {
+    font-size: 11px;
+    color: #444;
+    padding-left: 18px;
+    line-height: 1.5;
+}
+
+.ers-academic-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #eef2f8;
+    border-left: 4px solid var(--irctc-orange);
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+/* 4. 3D TATKAL WARP SPEED FX & HUD OVERLAY */
+.tatkal-warp-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    background: rgba(10, 16, 30, 0.75);
+    backdrop-filter: blur(6px);
+    transition: opacity 0.4s ease;
+}
+
+.tatkal-warp-overlay.hidden {
+    display: none;
+}
+
+#tatkal-warp-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.tatkal-hud-box {
+    position: relative;
+    z-index: 10001;
+    pointer-events: auto;
+    background: rgba(16, 29, 54, 0.92);
+    border: 2px solid var(--irctc-orange);
+    border-radius: 14px;
+    padding: 24px 32px;
+    text-align: center;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 0 50px rgba(251, 121, 43, 0.6), inset 0 0 20px rgba(251, 121, 43, 0.2);
+    animation: hud-warp-in 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    color: #ffffff;
+}
+
+@keyframes hud-warp-in {
+    0% { transform: scale(0.6) translateZ(-200px); opacity: 0; }
+    100% { transform: scale(1) translateZ(0); opacity: 1; }
+}
+
+.tatkal-hud-badge {
+    display: inline-block;
+    background: #d32f2f;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 12px;
+    border-radius: 12px;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+    box-shadow: 0 0 10px rgba(211, 47, 47, 0.8);
+}
+
+.tatkal-hud-title {
+    font-size: 20px;
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    text-shadow: 0 0 12px rgba(251, 121, 43, 0.8);
+}
+
+.tatkal-hud-subtitle {
+    font-size: 13px;
+    color: #cfd8dc;
+    margin-bottom: 20px;
+}
+
+.tatkal-hud-counters {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.hud-counter {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.hud-num {
+    display: block;
+    font-size: 18px;
+    font-weight: 900;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--irctc-gold);
+}
+
+.hud-lbl {
+    font-size: 10px;
+    color: #b0bec5;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.tatkal-hud-dismiss-btn {
+    background: linear-gradient(90deg, #fb792b, #d32f2f);
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 24px;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(251, 121, 43, 0.4);
+    transition: all 0.2s ease;
+}
+
+.tatkal-hud-dismiss-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(251, 121, 43, 0.7);
+}
+
+/* 5. 3D HOLOGRAM ORB FOR ASK DISHA 2.0 */
+.disha-3d-orb-trigger {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 999;
+    background: rgba(33, 61, 119, 0.95);
+    backdrop-filter: blur(12px);
+    border: 1.5px solid rgba(251, 121, 43, 0.6);
+    border-radius: 36px;
+    padding: 8px 16px 8px 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(33, 61, 119, 0.35), 0 0 15px rgba(251, 121, 43, 0.3);
+    transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    animation: orb-float 3.5s ease-in-out infinite;
+}
+
+.disha-3d-orb-trigger:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(33, 61, 119, 0.5), 0 0 25px rgba(251, 121, 43, 0.6);
+    border-color: var(--irctc-orange);
+}
+
+@keyframes orb-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-7px); }
+}
+
+.orb-3d-wrapper {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    perspective: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.orb-ring-outer {
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px dashed rgba(251, 121, 43, 0.8);
+    animation: ring-spin-outer 6s linear infinite;
+    transform-style: preserve-3d;
+}
+
+.orb-ring-inner {
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1.5px dotted rgba(245, 166, 35, 0.9);
+    animation: ring-spin-inner 4s linear infinite reverse;
+    transform-style: preserve-3d;
+}
+
+.orb-core {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #fb792b 0%, #213d77 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 12px rgba(251, 121, 43, 0.8);
+    z-index: 2;
+}
+
+.orb-icon {
+    font-size: 15px;
+}
+
+@keyframes ring-spin-outer {
+    0% { transform: rotateX(65deg) rotateY(15deg) rotateZ(0deg); }
+    100% { transform: rotateX(65deg) rotateY(15deg) rotateZ(360deg); }
+}
+
+@keyframes ring-spin-inner {
+    0% { transform: rotateX(25deg) rotateY(65deg) rotateZ(0deg); }
+    100% { transform: rotateX(25deg) rotateY(65deg) rotateZ(360deg); }
+}
+
+/* 6. 3D CARD TILT & SPECULAR GLARE EFFECT */
+.card-3d-tilt {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: transform 0.15s ease-out, box-shadow 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.glare-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    border-radius: inherit;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.btn-coach-3d {
+    background: #eef2f8;
+    color: var(--irctc-navy);
+    border: 1px solid #c7d2e3;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.btn-coach-3d:hover {
+    background: var(--irctc-navy);
+    color: #ffffff;
+    border-color: var(--irctc-navy);
+    box-shadow: 0 2px 6px rgba(33, 61, 119, 0.2);
+}
+
+

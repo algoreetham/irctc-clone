@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRCTC Next Generation e-Ticketing System</title>
+    <link rel="stylesheet" href="/css/irctc-theme.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+    <!-- Three.js 3D Engine for Interactive Railway Simulation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+    <!-- 1. SUPER HEADER (CRIS / GOVT OF INDIA / LIVE IST CLOCK) -->
+    <div class="super-header">
+        <div class="irctc-container super-header-content">
+            <div class="gov-logos">
+                <span style="font-size:18px;">🇮🇳</span>
+                <span class="gov-text">GOVERNMENT OF INDIA &bull; MINISTRY OF RAILWAYS &bull; CRIS</span>
+            </div>
+            <div class="clock-and-tools">
+                <span id="ist-clock" class="ist-clock">23-Oct-2026 [00:00:00 IST]</span>
+                <button id="audio-toggle-btn" class="audio-toggle-btn" onclick="toggleAudio()" title="Toggle Web Audio SFX">🔊 Audio ON</button>
+                <div class="top-nav-links">
+                    <a href="javascript:void(0)" onclick="openDisha()">Ask DISHA 2.0</a>
+                    <a href="javascript:void(0)" onclick="switchTab('pnr-tab')">PNR Status</a>
+                    <a href="javascript:void(0)" onclick="switchTab('wl-tab')">Charts / Vacancy</a>
+                    <a href="javascript:void(0)" onclick="showToast('Educational Simulation. All railway data is fictional for academic use.')">Alerts</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. MAIN IRCTC BRAND HEADER -->
+    <header class="irctc-main-header">
+        <div class="irctc-container main-header-row">
+            <a href="javascript:void(0)" class="irctc-brand" onclick="switchTab('search-tab')">
+                <div class="irctc-logo-badge">🚆</div>
+                <div class="brand-details">
+                    <h1>IRCTC</h1>
+                    <p>Next Generation e-Ticketing System</p>
+                </div>
+            </a>
+            
+            <div class="header-badges">
+                <div class="swarm-live-pill" onclick="switchTab('search-tab')" title="Local AI Swarm is currently simulating concurrent bookings">
+                    <span class="radar-pulse"></span>
+                    <span id="swarm-header-status">Local AI Swarm Active</span>
+                </div>
+                <div class="cdap-pill">
+                    🎓 Alliance Univ (E1CSA25306)
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3. PRIMARY IRCTC NAVIGATION BAR -->
+    <nav class="irctc-navbar">
+        <div class="irctc-container">
+            <ul class="irctc-nav-list">
+                <li><button class="nav-item-btn active" data-tab="search-tab">🚆 BOOK TICKET</button></li>
+                <li><button class="nav-item-btn" data-tab="availability-tab">💺 SEAT AVAILABILITY</button></li>
+                <li><button class="nav-item-btn" data-tab="wl-tab">⏳ WAITING LIST (WL)</button></li>
+                <li><button class="nav-item-btn" data-tab="pnr-tab">🎫 PNR STATUS</button></li>
+                <li><button class="nav-item-btn" data-tab="history-tab">📜 BOOKING HISTORY</button></li>
+                <li><button class="nav-item-btn highlight-tatkal" onclick="triggerTatkalRushOnTrain('DEMO101')">⚡ START TATKAL RUSH (&gt;15 BOTS)</button></li>
+                <li><button class="nav-item-btn" data-tab="oop-tab">💡 ACADEMIC RUBRICS</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 4. RUNNING ANNOUNCEMENT TICKER -->
+    <div class="irctc-ticker-bar">
+        <div class="irctc-container ticker-inner">
+            <span class="ticker-label">NEWS / ALERTS</span>
+            <div class="ticker-marquee">
+                <span class="ticker-text">
+                    ⚡ Concurrent AI Passenger Swarm Active: Autonomous bots are booking and competing in real-time on the same trains! &bull; Senior Citizen 40% Concession applied for passengers age 60+ (Object-Oriented Polymorphism) &bull; Automatic Promotion: When confirmed tickets are cancelled, highest priority Waiting List passengers are immediately promoted! &bull; Academic Simulation for Alliance University B.Tech CSE Course Code: E1CSA25306.
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. MAIN CONTENT CONTAINER -->
+    <main class="irctc-container" style="flex: 1;">
+
+        <!-- TAB 1: BOOK TICKET + AI SWARM HERO -->
+        <section id="search-tab" class="tab-panel active">
+
+            <!-- 3D LIVE RAILWAY DIORAMA HERO -->
+            <div class="rail-3d-wrapper card">
+                <div class="rail-3d-header">
+                    <div class="rail-3d-title">
+                        <span class="pulse-dot"></span>
+                        <h3>🚆 3D Vande Bharat Express &amp; Route Simulator</h3>
+                        <span class="badge-3d">WebGL 3D Interactive</span>
+                    </div>
+                    <div class="rail-3d-controls">
+                        <button type="button" class="ctrl-btn-3d active" onclick="set3dLighting('day')">☀️ Day</button>
+                        <button type="button" class="ctrl-btn-3d" onclick="set3dLighting('sunset')">🌅 Sunset</button>
+                        <button type="button" class="ctrl-btn-3d" onclick="set3dLighting('night')">🌙 Night</button>
+                        <button type="button" class="ctrl-btn-3d" onclick="reset3dCamera()">🎯 Reset Orbit</button>
+                        <button type="button" class="ctrl-btn-3d btn-rush-spark" onclick="boost3dTrainSpeed()">⚡ Speed Boost</button>
+                    </div>
+                </div>
+                <div id="rail-3d-viewport" class="rail-3d-viewport">
+                    <canvas id="railway-3d-canvas"></canvas>
+                    <div class="rail-3d-overlay-info">
+                        <span id="rail-3d-train-name">20607 / Vande Bharat Express</span> &bull; 
+                        <span id="rail-3d-speed">Cruising at 130 km/h</span> &bull; 
+                        <span id="rail-3d-status" style="color:#0f8a3c; font-weight:700;">ON TIME</span> &bull;
+                        <span style="opacity:0.85; font-size:11px;">(Drag with mouse to orbit camera in 3D &bull; Scroll to zoom)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-dashboard">
+                
+                <!-- LEFT: IRCTC BOOK TICKET WIDGET -->
+                <div class="card">
+                    <div class="card-header-irctc">
+                        <h2><span>🎫</span> BOOK TICKET</h2>
+                        <span style="font-size:11px; opacity:0.9;">IRCTC Direct Reservation</span>
+                    </div>
+                    <div class="card-body">
+                        <form id="search-form" class="booking-form-grid">
+                            
+                            <!-- ROUTE SELECTION -->
+                            <div class="route-selection-row">
+                                <div class="input-block">
+                                    <label for="source-input">From Station</label>
+                                    <div class="station-input-wrap">
+                                        <input type="text" id="source-input" value="Bengaluru" placeholder="Enter Source (e.g. Bengaluru)" required autocomplete="off">
+                                    </div>
+                                    <div class="popular-chips">
+                                        <button type="button" class="chip-btn" onclick="setStation('source','Bengaluru')">Bengaluru SBC</button>
+                                        <button type="button" class="chip-btn" onclick="setStation('source','Chennai')">Chennai MAS</button>
+                                        <button type="button" class="chip-btn" onclick="setStation('source','Mysuru')">Mysuru MYS</button>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="swap-btn-irctc" title="Swap Stations" onclick="swapStations()">⇄</button>
+
+                                <div class="input-block">
+                                    <label for="dest-input">To Station</label>
+                                    <div class="station-input-wrap">
+                                        <input type="text" id="dest-input" value="Chennai" placeholder="Enter Destination (e.g. Chennai)" required autocomplete="off">
+                                    </div>
+                                    <div class="popular-chips">
+                                        <button type="button" class="chip-btn" onclick="setStation('dest','Chennai')">Chennai MAS</button>
+                                        <button type="button" class="chip-btn" onclick="setStation('dest','Mysuru')">Mysuru MYS</button>
+                                        <button type="button" class="chip-btn" onclick="setStation('dest','Hyderabad')">Hyderabad HYB</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- DATE & CLASS -->
+                            <div class="date-class-row">
+                                <div class="input-block">
+                                    <label for="travel-date">Journey Date</label>
+                                    <input type="date" id="travel-date">
+                                </div>
+                                <div class="input-block">
+                                    <label for="class-filter">Class Preference</label>
+                                    <select id="class-filter">
+                                        <option value="ALL">All Classes</option>
+                                        <option value="GENERAL">2S - Second Sitting / General</option>
+                                        <option value="SLEEPER">SL - Sleeper Class</option>
+                                        <option value="AC">3A - AC 3 Tier</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- QUOTA SELECTION -->
+                            <div class="quota-row">
+                                <div class="input-block">
+                                    <label for="quota-select">Quota</label>
+                                    <select id="quota-select">
+                                        <option value="GENERAL">GENERAL</option>
+                                        <option value="LADIES">LADIES</option>
+                                        <option value="SR_CITIZEN">LOWER BERTH / SR. CITIZEN (40% OFF)</option>
+                                        <option value="TATKAL">TATKAL</option>
+                                        <option value="PREMIUM_TATKAL">PREMIUM TATKAL</option>
+                                    </select>
+                                </div>
+                                <div class="input-block">
+                                    <label>Booking Concessions</label>
+                                    <div class="checkbox-options">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" id="chk-flexible" checked> Flexible With Date
+                                        </label>
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" id="chk-berth" checked> Available Berth
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn-search-irctc">
+                                <span>Find Trains</span> ➔
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- RIGHT: LOCAL AI PASSENGER SWARM (TATKAL RUSH) STATION -->
+                <div class="card swarm-panel">
+                    <div class="card-header-irctc card-header-orange">
+                        <h2><span>🤖</span> LOCAL AI PASSENGER SWARM</h2>
+                        <span style="font-size:11px; font-weight:700;">Tatkal Rush Simulator</span>
+                    </div>
+                    <div class="card-body" style="display:flex; flex-direction:column; flex:1;">
+                        <div class="swarm-control-bar">
+                            <div style="display:flex; justify-content:space-between; align-items:center;">
+                                <span style="font-size:12px; font-weight:700; color:var(--irctc-navy);">SWARM FREQUENCY:</span>
+                                <div style="display:flex; align-items:center; gap:6px;">
+                                    <label style="font-size:11px; font-weight:600;">Target Train:</label>
+                                    <select id="rush-train-select" style="padding:2px 6px; font-size:11px; border-radius:3px; border:1px solid #c0c4cc;">
+                                        <option value="DEMO101">DEMO101 (Campus Express)</option>
+                                        <option value="12007">12007 (Shatabdi Express)</option>
+                                        <option value="20607">20607 (Vande Bharat)</option>
+                                        <option value="DEMO202">DEMO202 (Student Superfast)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="swarm-modes">
+                                <button type="button" class="swarm-mode-btn" data-mode="OFF">🔴 Pause</button>
+                                <button type="button" class="swarm-mode-btn active" data-mode="NORMAL">🟢 Normal (~3.5s)</button>
+                                <button type="button" class="swarm-mode-btn" data-mode="RUSH">🔥 Rush (~1.2s)</button>
+                            </div>
+                            <button type="button" id="trigger-rush-btn" class="btn-instant-rush">
+                                <span>⚡ Launch Tatkal Rush (>15 Bots on Tatkal Quota)</span>
+                            </button>
+                            <div style="font-size:10.5px; color:#b71c1c; text-align:center; margin-top:5px; font-weight:700;">
+                                ⚡ Concurrency Rule: 50% of Seats (e.g. 40 seats ➔ 20 Bots, strictly &gt;15 bots)!
+                            </div>
+                        </div>
+
+                        <div class="feed-header">
+                            <span class="feed-title">📡 Real-Time AI Passenger Activity</span>
+                            <span style="font-size:11px; color:#666;">Live Multithreaded Feed</span>
+                        </div>
+
+                        <!-- LIVE FEED TERMINAL BOX -->
+                        <div id="ai-live-feed" class="live-feed-box">
+                            <!-- Populated dynamically via JS -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- TRAIN SEARCH RESULTS -->
+            <div class="train-results-wrap">
+                <div class="results-meta-bar">
+                    <div>
+                        <span style="font-size:11px; text-transform:uppercase; color:#888; font-weight:700;">SEARCH RESULTS</span>
+                        <h3 id="results-heading" class="route-info-heading">BENGALURU ➔ CHENNAI</h3>
+                    </div>
+                    <div class="filter-sort-controls">
+                        <span id="results-count" class="avail-status-pill available">Searching timetable...</span>
+                        <button type="button" class="chip-btn" onclick="searchTrains('Bengaluru','Chennai')">🔄 Refresh Availability</button>
+                    </div>
+                </div>
+
+                <div id="train-results" class="trains-list">
+                    <!-- Train cards dynamically rendered here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: SEAT AVAILABILITY -->
+        <section id="availability-tab" class="tab-panel">
+            <div class="card" style="margin:20px 0;">
+                <div class="card-header-irctc">
+                    <h2><span>💺</span> ALL TRAINS LIVE SEAT AVAILABILITY GRID</h2>
+                    <button class="chip-btn" style="background:#fff; color:#213d77;" onclick="loadAvailabilityGrid()">🔄 Refresh</button>
+                </div>
+                <div class="card-body">
+                    <div id="availability-grid-container">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: WAITING LIST (WL) -->
+        <section id="wl-tab" class="tab-panel">
+            <div style="margin:20px 0;">
+                <div style="background:#fff; border:1px solid #dcdfe6; border-radius:8px; padding:16px 20px; margin-bottom:16px;">
+                    <h3 style="color:#213d77; margin-bottom:6px;">⏳ Waiting List (WL) & Automatic Promotion Engine</h3>
+                    <p style="font-size:13px; color:#555;">
+                        Demonstrates <strong>Course Outcome CO-4 & PrO-8/9</strong>. When all seats are reserved on a train, bookings transition into a FIFO Waiting List queue (up to 100 passengers). A dedicated background daemon thread (<code>WaitingListWorker</code>) monitors seat cancellations and automatically promotes waitlisted passengers using <code>wait()</code> and <code>notifyAll()</code> thread synchronization locks.
+                    </p>
+                </div>
+                <div id="wl-content-area">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: PNR STATUS & CANCELLATION -->
+        <section id="pnr-tab" class="tab-panel">
+            <div class="card" style="margin:20px 0; max-width:760px; margin-left:auto; margin-right:auto;">
+                <div class="card-header-irctc">
+                    <h2><span>🎫</span> PASSENGER CURRENT STATUS ENQUIRY (PNR)</h2>
+                </div>
+                <div class="card-body">
+                    <form id="pnr-form" style="display:flex; gap:12px; margin-bottom:20px;">
+                        <input type="text" id="pnr-search-input" placeholder="Enter 10-Digit PNR (e.g. PNR-1001)" required style="flex:1; padding:10px 14px; border:1px solid #c0c4cc; border-radius:4px; font-weight:600; text-transform:uppercase;">
+                        <button type="submit" class="btn-search-irctc" style="padding:10px 20px; font-size:13px;">Get Status</button>
+                    </form>
+                    <div id="pnr-result-box">
+                        <div style="background:#f4f6fa; border:1px dashed #c0c4cc; border-radius:6px; padding:24px; text-align:center; color:#666; font-size:13px;">
+                            Enter your reservation PNR number above to query real-time confirmation status, coach allocation, or process ticket cancellation.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 5: BOOKING HISTORY -->
+        <section id="history-tab" class="tab-panel">
+            <div class="card" style="margin:20px 0;">
+                <div class="card-header-irctc">
+                    <h2><span>📜</span> RESERVATION TRANSACTION AUDIT HISTORY</h2>
+                    <button class="chip-btn" style="background:#fff; color:#213d77;" onclick="loadBookingHistory()">🔄 Refresh History</button>
+                </div>
+                <div class="card-body">
+                    <div id="history-content-area">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 6: ACADEMIC CDAP RUBRICS -->
+        <section id="oop-tab" class="tab-panel">
+            <div class="card" style="margin:20px 0;">
+                <div class="card-header-irctc">
+                    <h2><span>🎓</span> ALLIANCE UNIVERSITY COURSE OUTCOME MAPPING (E1CSA25306)</h2>
+                </div>
+                <div class="card-body">
+                    <table class="ers-table">
+                        <thead>
+                            <tr>
+                                <th>Outcome</th>
+                                <th>Rubric Description</th>
+                                <th>Implementation in Codebase</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>CO-1</strong></td>
+                                <td>Classes, Methods, Static/Final Members</td>
+                                <td><code>Train.java</code>, <code>Passenger.java</code>, synchronized seat limits, immutable constants.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CO-2</strong></td>
+                                <td>Inheritance, Polymorphism & Concessions</td>
+                                <td><code>SeniorPassenger extends Passenger</code> (40% discount for age 60+), dynamic polymorphism via <code>Ticket</code> hierarchy (<code>GeneralTicket</code>, <code>SleeperTicket</code>, <code>ACTicket</code>).</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CO-3</strong></td>
+                                <td>Multithreading & Synchronization</td>
+                                <td><code>AiSwarmManager</code> (concurrent bots hitting the same train), <code>WaitingListWorker</code> daemon, thread-safe <code>Train.reserveSeats()</code> preventing race conditions.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CO-4</strong></td>
+                                <td>Collections & Waiting List Queues</td>
+                                <td>FIFO <code>Queue&lt;Booking&gt;</code> for Waiting List, <code>Stack&lt;Booking&gt;</code> for audit trail, <code>Hashtable&lt;String, Train&gt;</code> for O(1) indexed lookups, Stream API & Lambdas.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CO-5</strong></td>
+                                <td>JDBC Persistence & Web Server</td>
+                                <td><code>JdbcBookingRepository</code> (SQLite <code>PreparedStatement</code> & atomic transactions), zero-dependency built-in <code>WebServer</code> serving REST endpoints.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 6. BOOKING MODAL -->
+    <div id="booking-modal" class="modal-overlay hidden">
+        <div class="card" style="max-width:540px; width:100%; border-radius:8px; overflow:hidden;">
+            <div class="card-header-irctc">
+                <h2><span>✍️</span> PASSENGER DETAILS &amp; BOOKING</h2>
+                <button type="button" style="background:transparent; border:none; color:#fff; font-size:22px; cursor:pointer;" onclick="closeModal('booking-modal')">&times;</button>
+            </div>
+            <div class="card-body">
+                <div style="background:#eef2f8; border:1px solid #d0d7e5; border-radius:4px; padding:10px 14px; margin-bottom:16px;">
+                    <span style="font-size:11px; color:#555; font-weight:700;">SELECTED TRAIN</span>
+                    <h4 id="modal-train-info" style="color:#213d77; font-size:14px; margin-top:2px;">DEMO101 - Campus Express</h4>
+                </div>
+
+                <!-- Senior discount preview banner -->
+                <div id="senior-discount-banner" style="display:none; background:#ede7f6; border:1px solid #d1c4e9; color:#4527a0; border-radius:4px; padding:8px 12px; font-size:12px; font-weight:700; margin-bottom:14px;">
+                    👵 <strong>Senior Citizen Concession Applied!</strong> 40% discount will be deducted automatically from the base fare.
+                </div>
+
+                <!-- Tatkal advisory banner -->
+                <div id="tatkal-modal-banner" style="display:none; background:#fff3e0; border:1px solid #ffe0b2; color:#e65100; border-radius:4px; padding:8px 12px; font-size:12px; font-weight:700; margin-bottom:14px;">
+                    ⚡ <strong>IRCTC Tatkal Quota:</strong> Dynamic surcharge applies (+₹300 for AC, +₹150 for Sleeper, +₹50 for 2S). No concessions applicable under official Indian Railways Tatkal rules.
+                </div>
+
+                <form id="booking-form" class="booking-form-grid">
+                    <input type="hidden" id="book-train-number">
+
+                    <div style="display:grid; grid-template-columns:1.2fr 0.8fr; gap:12px;">
+                        <div class="input-block">
+                            <label for="book-passenger-name">Passenger Full Name</label>
+                            <input type="text" id="book-passenger-name" placeholder="e.g. Ramesh Kumar" required autocomplete="name">
+                        </div>
+                        <div class="input-block">
+                            <label for="book-quota">Booking Quota</label>
+                            <select id="book-quota" onchange="handleModalQuotaChange()">
+                                <option value="GENERAL">GENERAL</option>
+                                <option value="TATKAL">⚡ TATKAL (Fast Track)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                        <div class="input-block">
+                            <label for="book-passenger-age">Age (Years)</label>
+                            <input type="number" id="book-passenger-age" min="1" max="110" placeholder="e.g. 62" required>
+                        </div>
+                        <div class="input-block">
+                            <label for="book-seat-count">No. of Berths</label>
+                            <input type="number" id="book-seat-count" min="1" max="6" value="1" required>
+                        </div>
+                    </div>
+
+                    <div class="input-block">
+                        <label for="book-ticket-class">Travel Class</label>
+                        <select id="book-ticket-class">
+                            <option value="GENERAL">2S - Second Sitting / General</option>
+                            <option value="SLEEPER">SL - Sleeper Class</option>
+                            <option value="AC">3A - AC 3 Tier</option>
+                        </select>
+                    </div>
+
+                    <div style="background:#fafafa; border:1px solid #eee; border-radius:4px; padding:10px 12px;">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="book-fail-payment">
+                            <span style="font-size:12px; color:#b71c1c; font-weight:600;">Simulate Bank Payment Failure (Test Rollback)</span>
+                        </label>
+                    </div>
+
+                    <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:8px;">
+                        <button type="button" class="btn-card-rush" style="background:#eee; color:#333; border:1px solid #ccc;" onclick="closeModal('booking-modal')">Cancel</button>
+                        <button type="submit" id="btn-submit-booking" class="btn-search-irctc" style="padding:10px 20px; font-size:13px;">Pay &amp; Confirm Reservation</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7. 3D COACH BERTH VISUALIZER MODAL -->
+    <div id="coach-3d-modal" class="modal-overlay hidden">
+        <div class="coach-3d-container">
+            <div class="coach-3d-header">
+                <div style="display:flex; align-items:center; gap:12px;">
+                    <span style="font-size:26px;">💺</span>
+                    <div>
+                        <h3 id="coach-3d-train-title" style="font-size:16px; font-weight:800; color:#fff; letter-spacing:0.3px;">DEMO101 - 3D Coach Berth Visualizer</h3>
+                        <span id="coach-3d-subtitle" style="font-size:11.5px; opacity:0.9; color:#fff;">Interactive 3D Compartment Layout &bull; Real-Time AI Swarm Occupancy</span>
+                    </div>
+                </div>
+                <button type="button" class="modal-close-btn" onclick="closeModal('coach-3d-modal')">&times;</button>
+            </div>
+            <div class="coach-3d-body">
+                <div class="coach-3d-toolbar">
+                    <div class="coach-tabs">
+                        <button class="coach-tab-btn active" data-class="AC" onclick="switchCoachClass('AC')">AC 3-Tier (B1)</button>
+                        <button class="coach-tab-btn" data-class="SLEEPER" onclick="switchCoachClass('SLEEPER')">Sleeper (S4)</button>
+                        <button class="coach-tab-btn" data-class="GENERAL" onclick="switchCoachClass('GENERAL')">Second Sitting (D2)</button>
+                    </div>
+                    <div class="coach-legend">
+                        <span class="legend-item"><span class="legend-swatch available"></span> Available</span>
+                        <span class="legend-item"><span class="legend-swatch ai-booked"></span> Reserved (AI Swarm)</span>
+                        <span class="legend-item"><span class="legend-swatch tatkal-booked"></span> Tatkal Quota</span>
+                        <span class="legend-item"><span class="legend-swatch senior-booked"></span> Senior Citizen</span>
+                    </div>
+                </div>
+
+                <!-- 3D PERSPECTIVE COMPARTMENT STAGE -->
+                <div class="compartment-3d-stage">
+                    <div id="compartment-3d-grid" class="compartment-isometric-grid">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+
+                <div class="coach-stats-footer">
+                    <div class="coach-stat-box">
+                        <span class="stat-lbl">Class Berths:</span>
+                        <span id="coach-total-berths" class="stat-val">36 Berths</span>
+                    </div>
+                    <div class="coach-stat-box">
+                        <span class="stat-lbl">Vacant Berths:</span>
+                        <span id="coach-vacant-berths" class="stat-val" style="color:var(--irctc-green);">18</span>
+                    </div>
+                    <div class="coach-stat-box">
+                        <span class="stat-lbl">AI Booked:</span>
+                        <span id="coach-ai-berths" class="stat-val" style="color:var(--irctc-red);">18</span>
+                    </div>
+                    <button type="button" class="btn-instant-rush" style="margin-left:auto; font-size:11px; padding:6px 14px;" onclick="triggerTatkalRushFromCoach()">
+                        ⚡ Trigger Tatkal Rush on this Coach
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 8. AUTHENTIC IRCTC 3D ELECTRONIC RESERVATION SLIP (ERS) MODAL WITH 3D FLIP -->
+    <div id="ers-modal" class="modal-overlay hidden">
+        <div class="ers-ticket-3d-scene">
+            <div id="ers-card-flip" class="ers-ticket-3d-card">
+
+                <!-- FRONT FACE: PASSENGER DETAILS & BOARDING PASS -->
+                <div class="ers-card-face ers-card-front">
+                    <div class="ers-header">
+                        <div>
+                            <h3 style="font-size:16px; font-weight:800; letter-spacing:0.3px;">ELECTRONIC RESERVATION SLIP (ERS)</h3>
+                            <span style="font-size:11px; opacity:0.85;">Indian Railways &bull; IRCTC e-Ticketing Service</span>
+                        </div>
+                        <div class="ers-header-actions">
+                            <span class="hologram-seal" title="Authentic IRCTC Holographic Security Seal">IRCTC HOLOGRAM</span>
+                            <button type="button" class="modal-close-btn" onclick="closeModal('ers-modal')">&times;</button>
+                        </div>
+                    </div>
+
+                    <div class="ers-body">
+                        <div class="ers-watermark-stamp">
+                            <div class="ers-top-meta">
+                                <div>
+                                    <span style="font-size:11px; color:#666; font-weight:700;">PNR NUMBER</span>
+                                    <div id="ers-pnr" class="pnr-box">PNR-000000</div>
+                                </div>
+                                <div style="text-align:right;">
+                                    <span style="font-size:11px; color:#666; font-weight:700;">BOOKING STATUS</span>
+                                    <div><span id="ers-status" class="avail-status-pill available">CONFIRMED</span></div>
+                                </div>
+                            </div>
+
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; font-size:12px; margin-bottom:12px;">
+                                <div><strong>Train:</strong> <span id="ers-train">12007 / SHATABDI EXP</span></div>
+                                <div><strong>Class:</strong> <span id="ers-class">AC 3 TIER (3A)</span></div>
+                                <div><strong>Route:</strong> <span id="ers-route">BENGALURU ➔ CHENNAI</span></div>
+                                <div><strong>Seats:</strong> <span id="ers-seats">1 Seat(s)</span></div>
+                                <div><strong>Schedule:</strong> <span id="ers-times">06:00 AM ➔ 11:00 AM</span></div>
+                                <div><strong>Total Fare:</strong> <span id="ers-fare" style="font-weight:800; color:#213d77;">₹420.00</span></div>
+                                <div><strong>Booked On:</strong> <span id="ers-booking-time">-</span></div>
+                                <div><strong>Quota:</strong> <span id="ers-quota">GENERAL</span></div>
+                            </div>
+
+                            <table class="ers-table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Passenger Name</th>
+                                        <th>Age</th>
+                                        <th>Category</th>
+                                        <th>Berth Allocation</th>
+                                        <th>Concession</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ers-passenger-tbody">
+                                    <!-- Populated dynamically -->
+                                </tbody>
+                            </table>
+
+                            <div style="font-size:11px; color:#555; border-top:1px dashed #ccc; padding-top:10px; margin-top:12px; line-height:1.4;">
+                                <strong>Important Travel Advisory:</strong>
+                                1. One of the passengers booked on an e-ticket is required to present valid Original Identity Proof during the journey.<br>
+                                2. Valid for the journey specified. Educational simulation record for Alliance University Course Code: E1CSA25306.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ers-footer-actions">
+                        <button type="button" class="btn-card-rush" style="background:#eef2f8; color:#213d77; border:1px solid #d0d7e5;" onclick="closeModal('ers-modal')">Close</button>
+                        <button type="button" class="btn-3d-flip" onclick="toggleErsFlip()">🔄 3D Flip Ticket (View Back)</button>
+                        <button type="button" class="btn-search-irctc" style="padding:8px 18px; font-size:12px;" onclick="printErsTicket()">🖨️ Print / Save Ticket</button>
+                    </div>
+                </div>
+
+                <!-- BACK FACE: TERMS, 3D BARCODE & ACADEMIC CERTIFICATE -->
+                <div class="ers-card-face ers-card-back">
+                    <div class="ers-header" style="background:linear-gradient(135deg, #172b53 0%, #0d1b33 100%);">
+                        <div>
+                            <h3 style="font-size:16px; font-weight:800; letter-spacing:0.3px;">TERMS &amp; SECURITY VERIFICATION</h3>
+                            <span style="font-size:11px; opacity:0.85;">Indian Railways &bull; Cryptographic E-Ticket Back</span>
+                        </div>
+                        <button type="button" class="modal-close-btn" onclick="closeModal('ers-modal')">&times;</button>
+                    </div>
+
+                    <div class="ers-body">
+                        <div class="ers-back-content">
+                            <div class="ers-barcode-container">
+                                <div class="barcode-3d-strip">
+                                    <div class="barcode-lines"></div>
+                                    <span id="barcode-pnr-label" class="barcode-label">PNR-000000-IRCTC-SECURE</span>
+                                </div>
+                                <div class="qr-mock-box">
+                                    <div class="qr-pattern"></div>
+                                    <span style="font-size:9px; color:#888; margin-top:4px;">SCAN FOR TTE</span>
+                                </div>
+                            </div>
+
+                            <div class="ers-back-terms">
+                                <h4>REFUND &amp; CANCELLATION RULES (ACADEMIC ENGINE)</h4>
+                                <ul>
+                                    <li><strong>Confirmed Tickets:</strong> ₹60 per passenger deduction for General, ₹120 for Sleeper, ₹180 for AC if cancelled before chart preparation.</li>
+                                    <li><strong>Tatkal Quota:</strong> No refund on cancellation of confirmed Tatkal tickets as per official IRCTC rules.</li>
+                                    <li><strong>Waiting List Auto-Promotion:</strong> When confirmed tickets are cancelled, highest-priority WL/TQWL passengers are auto-promoted using background daemon thread synchronization.</li>
+                                </ul>
+
+                                <div class="ers-academic-badge">
+                                    <div style="font-size:18px;">🎓</div>
+                                    <div>
+                                        <strong>Alliance University &bull; B.Tech CSE Course Code: E1CSA25306</strong><br>
+                                        <span style="font-size:10.5px; color:#555;">Programming in Java &bull; Multithreaded AI Swarm Simulation</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ers-footer-actions">
+                        <button type="button" class="btn-3d-flip" onclick="toggleErsFlip()">🔄 3D Flip Back to Front</button>
+                        <button type="button" class="btn-card-rush" style="background:#eef2f8; color:#213d77; border:1px solid #d0d7e5;" onclick="closeModal('ers-modal')">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- 9. 3D TATKAL WARP SPEED FX & HUD OVERLAY -->
+    <div id="tatkal-warp-overlay" class="tatkal-warp-overlay hidden">
+        <canvas id="tatkal-warp-canvas"></canvas>
+        <div class="tatkal-hud-box">
+            <div class="tatkal-hud-badge">⚡ IRCTC HIGH-CONCURRENCY TATKAL PROTOCOL ACTIVATED</div>
+            <h1 id="tatkal-hud-title" class="tatkal-hud-title">10:00:00 AM TATKAL WINDOW UNLOCKED</h1>
+            <p id="tatkal-hud-subtitle" class="tatkal-hud-subtitle">22 Autonomous AI Passengers Competing Simultaneously on Quota Berths</p>
+            <div class="tatkal-hud-counters">
+                <div class="hud-counter">
+                    <span class="hud-num" id="hud-bots-count">22</span>
+                    <span class="hud-lbl">AI Bots Dispatched</span>
+                </div>
+                <div class="hud-counter">
+                    <span class="hud-num" id="hud-latency">15ms - 450ms</span>
+                    <span class="hud-lbl">Micro-Jitter Concurrency</span>
+                </div>
+                <div class="hud-counter">
+                    <span class="hud-num" id="hud-quota">TATKAL ONLY</span>
+                    <span class="hud-lbl">Surcharge &amp; TQWL Active</span>
+                </div>
+            </div>
+            <button type="button" class="tatkal-hud-dismiss-btn" onclick="dismissTatkalWarp()">Close Warp HUD</button>
+        </div>
+    </div>
+
+    <!-- 10. ASK DISHA 2.0 FLOATING 3D HOLOGRAM ORB WIDGET -->
+    <div id="disha-trigger" class="disha-3d-orb-trigger" title="Ask DISHA 2.0 AI Assistant">
+        <div class="orb-3d-wrapper">
+            <div class="orb-ring-outer"></div>
+            <div class="orb-ring-inner"></div>
+            <div class="orb-core">
+                <span class="orb-icon">🤖</span>
+            </div>
+            <div class="orb-pulse-wave"></div>
+        </div>
+        <div class="disha-trigger-text">
+            <span class="disha-title">Ask DISHA 2.0</span>
+            <span class="disha-subtitle">Local 3D AI Assistant</span>
+        </div>
+    </div>
+
+    <!-- ASK DISHA CHAT DIALOG -->
+    <div id="disha-dialog" class="disha-chat-dialog hidden">
+        <div class="disha-chat-header">
+            <div class="disha-header-profile">
+                <div style="width:32px; height:32px; background:#fff; color:#213d77; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:18px;">🤖</div>
+                <div>
+                    <h4 style="font-size:13px; font-weight:800; line-height:1.1;">Ask DISHA 2.0</h4>
+                    <span style="font-size:10px; opacity:0.9;">IRCTC Virtual Assistant (Local AI)</span>
+                </div>
+            </div>
+            <button type="button" id="disha-close" class="disha-close-btn">&times;</button>
+        </div>
+
+        <div id="disha-messages" class="disha-messages-area">
+            <!-- Messages streamed here -->
+        </div>
+
+        <div id="disha-suggestions" class="disha-suggestions-row">
+            <!-- Suggestion chips -->
+        </div>
+
+        <div class="disha-input-row">
+            <input type="text" id="disha-input" placeholder="Ask about trains, PNR, Tatkal rush..." autocomplete="off">
+            <button type="button" id="disha-send" class="disha-send-btn">➔</button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LIBS -->
+    <script src="/js/irctc-app.js"></script>
+    <script src="/js/disha-chat.js"></script>
+</body>
+</html>
