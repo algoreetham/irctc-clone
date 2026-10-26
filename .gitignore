@@ -1,0 +1,24 @@
+# Compiled class files
+bin/
+*.class
+
+# Build tools & caches
+.gradle/
+build/
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary test persistence files
+data/test_*.csv
+data/test_*.db
+data/test_*.db-journal
