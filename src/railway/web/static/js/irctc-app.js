@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initSwarmControls();
     initWebAudio();
     init3dRailwayDiorama();
-    init3dCardTilt();
     initTatkalWarpCanvas();
 
     // Initial load
@@ -272,14 +271,12 @@ function createIrctcTrainCard(train) {
             </div>
 
             <div class="card-actions-row">
-                <button type="button" class="btn-coach-3d" title="Inspect 3D Coach Berth Layout" onclick="open3dCoachVisualizer('${train.number}')">💺 3D Coach View</button>
                 <button type="button" class="btn-book-class" onclick="openBookingModal('${train.number}', 'GENERAL')">Book Now</button>
                 <button type="button" class="btn-card-rush" title="Simulate AI Passenger Tatkal Bookings" onclick="triggerTatkalRushOnTrain('${train.number}')">⚡ Tatkal Rush</button>
             </div>
         </div>
     `;
 
-    attach3dCardTilt(card);
     return card;
 }
 
@@ -630,10 +627,6 @@ function displayErsTicket(booking) {
             </tr>
         `;
     }
-
-    // Reset 3D flip to front face
-    const flipCard = document.getElementById('ers-card-flip');
-    if (flipCard) flipCard.classList.remove('flipped');
 
     const barcodeLbl = document.getElementById('barcode-pnr-label');
     if (barcodeLbl) barcodeLbl.textContent = `${booking.pnr}-IRCTC-AUTHENTIC`;
@@ -1205,85 +1198,291 @@ function initThreeJsRailway(container, canvas) {
     // Build Vande Bharat Locomotive Train
     threeTrainGroup = new THREE.Group();
 
-    // 1. Aerodynamic Engine Wedge Body
-    const engineMat = new THREE.MeshStandardMaterial({ color: 0xf5f7fa, metalness: 0.3, roughness: 0.3 });
-    const blueStripeMat = new THREE.MeshStandardMaterial({ color: 0x1565c0, metalness: 0.4, roughness: 0.4 });
-    const engineBody = new THREE.Mesh(new THREE.BoxGeometry(4.2, 4.4, 20), engineMat);
-    engineBody.position.set(0, 2.5, 0);
-    threeTrainGroup.add(engineBody);
+    // =========================================================================
+    // BUILD AUTHENTIC INDIAN RAILWAYS WAP-7 LOCOMOTIVE + RAJDHANI LHB COACHES
+    // =========================================================================
+    threeTrainGroup = new THREE.Group();
 
-    // Deep blue livery stripe along sides
-    const stripe = new THREE.Mesh(new THREE.BoxGeometry(4.3, 1.2, 20), blueStripeMat);
-    stripe.position.set(0, 2.2, 0);
-    threeTrainGroup.add(stripe);
+    // Palette & Materials
+    const wap7BodyMat = new THREE.MeshStandardMaterial({ color: 0xedeef0, roughness: 0.35, metalness: 0.2 }); // Off-white WAP-7 body
+    const irRedStripeMat = new THREE.MeshStandardMaterial({ color: 0xd32f2f, roughness: 0.35, metalness: 0.2 }); // Indian Railways Signal Red
+    const irDarkChassisMat = new THREE.MeshStandardMaterial({ color: 0x212121, roughness: 0.8, metalness: 0.5 }); // Dark chassis & bogies
+    const bufferMat = new THREE.MeshStandardMaterial({ color: 0x1f2937, metalness: 0.85, roughness: 0.25 }); // Steel buffers
+    const bufferBeamMat = new THREE.MeshStandardMaterial({ color: 0xb71c1c, roughness: 0.4, metalness: 0.3 }); // Signal Red buffer beam
+    const cowcatcherMat = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.7 });
+    const hazardYellowMat = new THREE.MeshStandardMaterial({ color: 0xfbc02d, roughness: 0.4 }); // High-visibility hazard yellow
+    const glassMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.95, roughness: 0.05 }); // Dark tinted cab glass
+    const louverMat = new THREE.MeshStandardMaterial({ color: 0x455a64, metalness: 0.6, roughness: 0.5 }); // Engine vent grilles
+    const pantoRedMat = new THREE.MeshStandardMaterial({ color: 0xb71c1c, metalness: 0.6, roughness: 0.3 });
+    const insulatorMat = new THREE.MeshStandardMaterial({ color: 0x8d6e63, roughness: 0.4 }); // Ceramic brown/terracotta
+    const headlightMat = new THREE.MeshStandardMaterial({ color: 0xfff9c4, emissive: 0xffeb3b, emissiveIntensity: 1.4 });
+    const ditchLightMat = new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xfff59d, emissiveIntensity: 1.1 });
 
-    // Aerodynamic Nose Wedge (front)
-    const noseGeo = new THREE.ConeGeometry(2.3, 4.5, 4);
-    const nose = new THREE.Mesh(noseGeo, engineMat);
-    nose.rotation.x = Math.PI / 2;
-    nose.rotation.y = Math.PI / 4;
-    nose.position.set(0, 2.3, 11.2);
-    threeTrainGroup.add(nose);
+    // -------------------------------------------------------------
+    // 1. WAP-7 LOCOMOTIVE BODY & CABIN
+    // -------------------------------------------------------------
+    const locoGroup = new THREE.Group();
 
-    // Dark Tinted Windshield
-    const glassMat = new THREE.MeshStandardMaterial({ color: 0x111e30, metalness: 0.9, roughness: 0.1 });
-    const windshield = new THREE.Mesh(new THREE.BoxGeometry(3.6, 1.4, 1.5), glassMat);
-    windshield.position.set(0, 3.4, 10.2);
-    windshield.rotation.x = -0.3;
-    threeTrainGroup.add(windshield);
+    // Main Boxy Locomotive Body
+    const locoMain = new THREE.Mesh(new THREE.BoxGeometry(4.3, 3.8, 18), wap7BodyMat);
+    locoMain.position.set(0, 2.9, 0);
+    locoGroup.add(locoMain);
 
-    // Glowing passenger windows
-    const winMat = new THREE.MeshStandardMaterial({ color: 0xffd54f, emissive: 0xffb300, emissiveIntensity: 0.6 });
-    [-2.15, 2.15].forEach(x => {
-        for (let wz = -7; wz <= 5; wz += 3) {
-            const win = new THREE.Mesh(new THREE.BoxGeometry(0.1, 1.1, 1.8), winMat);
-            win.position.set(x, 2.9, wz);
-            threeTrainGroup.add(win);
-        }
+    // Aerodynamic Sloped Cab Brow (Front)
+    const cabFront = new THREE.Mesh(new THREE.BoxGeometry(4.3, 3.6, 3.5), wap7BodyMat);
+    cabFront.position.set(0, 2.8, 9.6);
+    cabFront.rotation.x = -0.06;
+    locoGroup.add(cabFront);
+
+    // Rounded Aerodynamic Cab Nose Wedge
+    const cabNose = new THREE.Mesh(new THREE.CylinderGeometry(2.15, 2.15, 4.3, 16, 1, false, 0, Math.PI), wap7BodyMat);
+    cabNose.rotation.z = Math.PI / 2;
+    cabNose.rotation.y = Math.PI / 2;
+    cabNose.position.set(0, 2.3, 11.2);
+    locoGroup.add(cabNose);
+
+    // Rounded Roof Arch
+    const roofCurve = new THREE.Mesh(new THREE.CylinderGeometry(2.15, 2.15, 20.8, 20, 1, false, 0, Math.PI), irDarkChassisMat);
+    roofCurve.rotation.x = Math.PI / 2;
+    roofCurve.position.set(0, 4.8, 0.4);
+    locoGroup.add(roofCurve);
+
+    // -------------------------------------------------------------
+    // 2. ICONIC INDIAN RAILWAYS LIVERY & CHEVRON
+    // -------------------------------------------------------------
+    // Waist Red Livery Bands along engine flanks
+    [-2.16, 2.16].forEach(x => {
+        const stripe = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.7, 21), irRedStripeMat);
+        stripe.position.set(x, 2.2, 0.5);
+        locoGroup.add(stripe);
     });
 
-    // Rooftop Pantograph
-    const pantoMat = new THREE.MeshStandardMaterial({ color: 0xd32f2f, metalness: 0.6 });
-    const pantoBase = new THREE.Mesh(new THREE.BoxGeometry(2, 0.4, 3), pantoMat);
-    pantoBase.position.set(0, 4.9, -4);
-    threeTrainGroup.add(pantoBase);
+    // Front Red Chevron / V-Stripe on Nose (Iconic Indian Railways WAP-7 livery)
+    const chevronLeft = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.4, 0.1), irRedStripeMat);
+    chevronLeft.position.set(-0.8, 2.2, 11.55);
+    chevronLeft.rotation.z = 0.35;
+    locoGroup.add(chevronLeft);
 
-    const pantoArm1 = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 3.2), pantoMat);
-    pantoArm1.rotation.x = -0.55;
-    pantoArm1.position.set(0, 6.2, -4.8);
-    threeTrainGroup.add(pantoArm1);
+    const chevronRight = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.4, 0.1), irRedStripeMat);
+    chevronRight.position.set(0.8, 2.2, 11.55);
+    chevronRight.rotation.z = -0.35;
+    locoGroup.add(chevronRight);
 
-    const pantoArm2 = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 3.2), pantoMat);
-    pantoArm2.rotation.x = 0.55;
-    pantoArm2.position.set(0, 7.8, -4.0);
-    threeTrainGroup.add(pantoArm2);
+    // Center Locomotive Number Plate: "WAP-7 #30201"
+    const numPlate = new THREE.Mesh(new THREE.BoxGeometry(1.4, 0.5, 0.12), irRedStripeMat);
+    numPlate.position.set(0, 1.8, 11.6);
+    locoGroup.add(numPlate);
 
-    const pantoShoe = new THREE.Mesh(new THREE.BoxGeometry(3.2, 0.15, 0.5), pantoMat);
-    pantoShoe.position.set(0, 9.4, -3.2);
-    threeTrainGroup.add(pantoShoe);
-
-    // 2. Trailing Coach 1
-    const coachBody = new THREE.Mesh(new THREE.BoxGeometry(4.2, 4.4, 20), engineMat);
-    coachBody.position.set(0, 2.5, -22);
-    threeTrainGroup.add(coachBody);
-
-    const coachStripe = new THREE.Mesh(new THREE.BoxGeometry(4.3, 1.2, 20), blueStripeMat);
-    coachStripe.position.set(0, 2.2, -22);
-    threeTrainGroup.add(coachStripe);
-
-    // Windows for coach
-    [-2.15, 2.15].forEach(x => {
-        for (let wz = -30; wz <= -14; wz += 3) {
-            const win = new THREE.Mesh(new THREE.BoxGeometry(0.1, 1.1, 1.8), winMat);
-            win.position.set(x, 2.9, wz);
-            threeTrainGroup.add(win);
-        }
+    // Side Ventilation Louver Grilles
+    [-2.16, 2.16].forEach(x => {
+        [-4, 0, 4].forEach(z => {
+            const louver = new THREE.Mesh(new THREE.BoxGeometry(0.05, 1.4, 2.6), louverMat);
+            louver.position.set(x, 3.4, z);
+            locoGroup.add(louver);
+        });
     });
 
-    // Gangway connector
-    const gangway = new THREE.Mesh(new THREE.BoxGeometry(3.2, 3.6, 2.2), new THREE.MeshStandardMaterial({ color: 0x222 }));
-    gangway.position.set(0, 2.3, -11);
-    threeTrainGroup.add(gangway);
+    // -------------------------------------------------------------
+    // 3. CABIN WINDSHIELD & LIGHTING
+    // -------------------------------------------------------------
+    // Twin Split Dark Windshields
+    [-1.05, 1.05].forEach(x => {
+        const win = new THREE.Mesh(new THREE.BoxGeometry(1.5, 1.15, 0.2), glassMat);
+        win.position.set(x, 3.75, 10.95);
+        win.rotation.x = -0.22;
+        locoGroup.add(win);
+    });
+
+    // Top Cyclops Twin-Beam Headlight (Roof Peak Center)
+    const cyclopsHousing = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.55, 0.6, 16), irDarkChassisMat);
+    cyclopsHousing.rotation.x = Math.PI / 2;
+    cyclopsHousing.position.set(0, 4.85, 10.6);
+    locoGroup.add(cyclopsHousing);
+
+    const cyclopsLens1 = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.18, 0.1), headlightMat);
+    cyclopsLens1.rotation.x = Math.PI / 2;
+    cyclopsLens1.position.set(-0.2, 4.85, 10.92);
+    locoGroup.add(cyclopsLens1);
+
+    const cyclopsLens2 = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.18, 0.1), headlightMat);
+    cyclopsLens2.rotation.x = Math.PI / 2;
+    cyclopsLens2.position.set(0.2, 4.85, 10.92);
+    locoGroup.add(cyclopsLens2);
+
+    // Twin Lower Ditch / Marker Lights (above buffer beam)
+    [-1.6, 1.6].forEach(x => {
+        const ditch = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.25, 0.3), irDarkChassisMat);
+        ditch.rotation.x = Math.PI / 2;
+        ditch.position.set(x, 1.65, 11.45);
+        locoGroup.add(ditch);
+
+        const ditchLens = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, 0.1), ditchLightMat);
+        ditchLens.rotation.x = Math.PI / 2;
+        ditchLens.position.set(x, 1.65, 11.6);
+        locoGroup.add(ditchLens);
+    });
+
+    // -------------------------------------------------------------
+    // 4. FRONT RED BUFFER BEAM, ROUND BUFFERS & COW CATCHER
+    // -------------------------------------------------------------
+    // Front Signal Red Buffer Beam
+    const bufferBeam = new THREE.Mesh(new THREE.BoxGeometry(4.4, 0.8, 0.6), bufferBeamMat);
+    bufferBeam.position.set(0, 1.0, 11.4);
+    locoGroup.add(bufferBeam);
+
+    // Left and Right Circular Buffers
+    [-1.5, 1.5].forEach(x => {
+        const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.15, 0.7), bufferMat);
+        shaft.rotation.x = Math.PI / 2;
+        shaft.position.set(x, 1.0, 11.8);
+        locoGroup.add(shaft);
+
+        const plate = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.42, 0.12, 16), bufferMat);
+        plate.rotation.x = Math.PI / 2;
+        plate.position.set(x, 1.0, 12.18);
+        locoGroup.add(plate);
+    });
+
+    // Center Knuckle / Screw Coupler Hook
+    const coupler = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.4, 0.9), bufferMat);
+    coupler.position.set(0, 0.95, 11.9);
+    locoGroup.add(coupler);
+
+    // Indian Cattle Guard (Cowcatcher / Pilot) with Hazard Stripes
+    const cowcatcherBase = new THREE.Mesh(new THREE.BoxGeometry(4.2, 0.6, 0.8), cowcatcherMat);
+    cowcatcherBase.position.set(0, 0.35, 11.1);
+    cowcatcherBase.rotation.x = -0.35;
+    locoGroup.add(cowcatcherBase);
+
+    // Alternating Yellow and Black warning slats on the cowcatcher
+    for (let bx = -1.8; bx <= 1.8; bx += 0.45) {
+        const isYellow = Math.round((bx + 1.8) / 0.45) % 2 === 0;
+        const slat = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.65, 0.1), isYellow ? hazardYellowMat : cowcatcherMat);
+        slat.position.set(bx, 0.35, 11.45);
+        slat.rotation.x = -0.35;
+        locoGroup.add(slat);
+    }
+
+    // Heavy-Duty Bogie Undercarriage & Wheels
+    [-5.5, 5.5].forEach(bz => {
+        const bogieFrame = new THREE.Mesh(new THREE.BoxGeometry(4.0, 0.6, 6.5), irDarkChassisMat);
+        bogieFrame.position.set(0, 0.5, bz);
+        locoGroup.add(bogieFrame);
+
+        [-2.2, 0, 2.2].forEach(wz => {
+            [-2.1, 2.1].forEach(wx => {
+                const wheel = new THREE.Mesh(new THREE.CylinderGeometry(0.65, 0.65, 0.28, 16), bufferMat);
+                wheel.rotation.z = Math.PI / 2;
+                wheel.position.set(wx, 0.45, bz + wz);
+                locoGroup.add(wheel);
+            });
+        });
+    });
+
+    // -------------------------------------------------------------
+    // 5. HIGH-REACH ROOF PANTOGRAPHS (ELECTRIC TRACTION)
+    // -------------------------------------------------------------
+    [-5, 5].forEach(pz => {
+        // Ceramic Insulators
+        [-1, 1].forEach(ix => {
+            [-1, 1].forEach(iz => {
+                const ins = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.15, 0.45), insulatorMat);
+                ins.position.set(ix, 5.15, pz + iz * 0.9);
+                locoGroup.add(ins);
+            });
+        });
+
+        const pantoBase = new THREE.Mesh(new THREE.BoxGeometry(2.4, 0.2, 2.2), pantoRedMat);
+        pantoBase.position.set(0, 5.35, pz);
+        locoGroup.add(pantoBase);
+
+        // Pantograph Arms
+        const pantoArm1 = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 2.8), pantoRedMat);
+        pantoArm1.rotation.x = (pz > 0 ? -0.55 : 0.55);
+        pantoArm1.position.set(0, 6.6, pz + (pz > 0 ? -0.7 : 0.7));
+        locoGroup.add(pantoArm1);
+
+        const pantoArm2 = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 2.8), pantoRedMat);
+        pantoArm2.rotation.x = (pz > 0 ? 0.55 : -0.55);
+        pantoArm2.position.set(0, 8.0, pz + (pz > 0 ? 0.1 : -0.1));
+        locoGroup.add(pantoArm2);
+
+        // Contact Shoe touching OHE catenary wire
+        const pantoShoe = new THREE.Mesh(new THREE.BoxGeometry(3.2, 0.12, 0.45), new THREE.MeshStandardMaterial({ color: 0xd7ccc8, metalness: 0.8 }));
+        pantoShoe.position.set(0, 9.4, pz + (pz > 0 ? 0.8 : -0.8));
+        locoGroup.add(pantoShoe);
+    });
+
+    threeTrainGroup.add(locoGroup);
+
+    // -------------------------------------------------------------
+    // 6. TRAILING RAJDHANI LHB COACHES (RED & SILVER LIVERY)
+    // -------------------------------------------------------------
+    const lhbRedMat = new THREE.MeshStandardMaterial({ color: 0x9b111e, roughness: 0.35, metalness: 0.2 }); // Deep Rajdhani Red
+    const lhbCreamMat = new THREE.MeshStandardMaterial({ color: 0xe0e0e0, roughness: 0.3, metalness: 0.3 }); // Silver-grey cream
+    const lhbRoofMat = new THREE.MeshStandardMaterial({ color: 0xb0bec5, roughness: 0.4, metalness: 0.6 }); // Ribbed stainless roof
+    const lhbStripeMat = new THREE.MeshStandardMaterial({ color: 0xfbc02d, roughness: 0.3 }); // Gold/yellow pin-stripe
+    const coachWinMat = new THREE.MeshStandardMaterial({ color: 0xffd54f, emissive: 0xffa000, emissiveIntensity: 0.65 });
+    const gangwayMat = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.9 });
+
+    [-24, -46].forEach(coachZ => {
+        const coachGroup = new THREE.Group();
+
+        // Coach Lower Body (Rajdhani Red)
+        const coachLower = new THREE.Mesh(new THREE.BoxGeometry(4.2, 2.2, 19.5), lhbRedMat);
+        coachLower.position.set(0, 1.8, coachZ);
+        coachGroup.add(coachLower);
+
+        // Coach Upper Body & Window Band
+        const coachUpper = new THREE.Mesh(new THREE.BoxGeometry(4.2, 1.8, 19.5), lhbCreamMat);
+        coachUpper.position.set(0, 3.6, coachZ);
+        coachGroup.add(coachUpper);
+
+        // Yellow Accent Pin-Stripe
+        [-2.12, 2.12].forEach(x => {
+            const pin = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.15, 19.4), lhbStripeMat);
+            pin.position.set(x, 2.8, coachZ);
+            coachGroup.add(pin);
+        });
+
+        // Stainless Steel Ribbed Roof
+        const coachRoof = new THREE.Mesh(new THREE.CylinderGeometry(2.1, 2.1, 19.5, 20, 1, false, 0, Math.PI), lhbRoofMat);
+        coachRoof.rotation.x = Math.PI / 2;
+        coachRoof.position.set(0, 4.4, coachZ);
+        coachGroup.add(coachRoof);
+
+        // Panoramic LHB Passenger Windows (Glowing warm cabin lights)
+        [-2.12, 2.12].forEach(x => {
+            for (let wz = -7; wz <= 7; wz += 2.8) {
+                const win = new THREE.Mesh(new THREE.BoxGeometry(0.08, 1.0, 1.9), coachWinMat);
+                win.position.set(x, 3.4, coachZ + wz);
+                coachGroup.add(win);
+            }
+        });
+
+        // FIAT Bogies & Wheels under coaches
+        [-6.5, 6.5].forEach(bz => {
+            const bogie = new THREE.Mesh(new THREE.BoxGeometry(3.8, 0.5, 4.5), irDarkChassisMat);
+            bogie.position.set(0, 0.5, coachZ + bz);
+            coachGroup.add(bogie);
+
+            [-1.5, 1.5].forEach(wz => {
+                [-2.1, 2.1].forEach(wx => {
+                    const wheel = new THREE.Mesh(new THREE.CylinderGeometry(0.6, 0.6, 0.25, 16), bufferMat);
+                    wheel.rotation.z = Math.PI / 2;
+                    wheel.position.set(wx, 0.45, coachZ + bz + wz);
+                    coachGroup.add(wheel);
+                });
+            });
+        });
+
+        // Accordion Vestibule Gangway connecting cars
+        const gangway = new THREE.Mesh(new THREE.BoxGeometry(2.8, 3.4, 2.6), gangwayMat);
+        gangway.position.set(0, 2.4, coachZ + 10.9);
+        coachGroup.add(gangway);
+
+        threeTrainGroup.add(coachGroup);
+    });
 
     threeScene.add(threeTrainGroup);
 
@@ -1589,16 +1788,7 @@ function triggerTatkalRushFromCoach() {
     triggerTatkalRushOnTrain(activeCoachTrainNumber);
 }
 
-// =========================================================================
-// 4. 3D HOLOGRAPHIC FLIP TICKET (ERS)
-// =========================================================================
-function toggleErsFlip() {
-    const card = document.getElementById('ers-card-flip');
-    if (card) {
-        card.classList.toggle('flipped');
-        playAudioTone('flip');
-    }
-}
+
 
 // =========================================================================
 // 5. 3D TATKAL WARP SPEED FX & HUD OVERLAY
@@ -1699,46 +1889,5 @@ function animateWarp() {
     warpAnimId = requestAnimationFrame(animateWarp);
 }
 
-// =========================================================================
-// 6. PHYSICS-BASED 3D CARD TILT & SPECULAR GLARE
-// =========================================================================
-function init3dCardTilt() {
-    const cards = document.querySelectorAll('.card, .swarm-panel, .irctc-train-card');
-    cards.forEach(attach3dCardTilt);
-}
 
-function attach3dCardTilt(card) {
-    if (!card || card.dataset.tiltAttached) return;
-    card.dataset.tiltAttached = 'true';
-    card.classList.add('card-3d-tilt');
-
-    let glare = card.querySelector('.glare-overlay');
-    if (!glare) {
-        glare = document.createElement('div');
-        glare.className = 'glare-overlay';
-        card.appendChild(glare);
-    }
-
-    card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const normX = (x / rect.width - 0.5) * 2;
-        const normY = (y / rect.height - 0.5) * 2;
-
-        const rotX = -normY * 8;
-        const rotY = normX * 8;
-
-        card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.015, 1.015, 1.015)`;
-        if (glare) {
-            glare.style.opacity = '1';
-            glare.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0) 65%)`;
-        }
-    });
-
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-        if (glare) glare.style.opacity = '0';
-    });
-}
 

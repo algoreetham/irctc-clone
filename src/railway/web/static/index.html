@@ -89,13 +89,13 @@
         <!-- TAB 1: BOOK TICKET + AI SWARM HERO -->
         <section id="search-tab" class="tab-panel active">
 
-            <!-- 3D LIVE RAILWAY DIORAMA HERO -->
+            <!-- 3D LIVE RAILWAY TATKAL SPEED SIMULATOR HERO -->
             <div class="rail-3d-wrapper card">
                 <div class="rail-3d-header">
                     <div class="rail-3d-title">
                         <span class="pulse-dot"></span>
-                        <h3>🚆 3D Vande Bharat Express &amp; Route Simulator</h3>
-                        <span class="badge-3d">WebGL 3D Interactive</span>
+                        <h3>🇮🇳 3D Indian Railways WAP-7 Tatkal Speed Simulator</h3>
+                        <span class="badge-3d">Tatkal Rush Engine</span>
                     </div>
                     <div class="rail-3d-controls">
                         <button type="button" class="ctrl-btn-3d active" onclick="set3dLighting('day')">☀️ Day</button>
@@ -108,8 +108,8 @@
                 <div id="rail-3d-viewport" class="rail-3d-viewport">
                     <canvas id="railway-3d-canvas"></canvas>
                     <div class="rail-3d-overlay-info">
-                        <span id="rail-3d-train-name">20607 / Vande Bharat Express</span> &bull; 
-                        <span id="rail-3d-speed">Cruising at 130 km/h</span> &bull; 
+                        <span id="rail-3d-train-name">WAP-7 #30201 / Indian Railways Superfast</span> &bull; 
+                        <span id="rail-3d-speed">Tatkal Cruising at 130 km/h</span> &bull; 
                         <span id="rail-3d-status" style="color:#0f8a3c; font-weight:700;">ON TIME</span> &bull;
                         <span style="opacity:0.85; font-size:11px;">(Drag with mouse to orbit camera in 3D &bull; Scroll to zoom)</span>
                     </div>
@@ -517,127 +517,82 @@
         </div>
     </div>
 
-    <!-- 8. AUTHENTIC IRCTC 3D ELECTRONIC RESERVATION SLIP (ERS) MODAL WITH 3D FLIP -->
+    <!-- 8. AUTHENTIC IRCTC ELECTRONIC RESERVATION SLIP (ERS) -->
     <div id="ers-modal" class="modal-overlay hidden">
-        <div class="ers-ticket-3d-scene">
-            <div id="ers-card-flip" class="ers-ticket-3d-card">
+        <div class="ers-ticket-container">
+            <div class="ers-header">
+                <div>
+                    <h3 style="font-size:16px; font-weight:800; letter-spacing:0.3px;">ELECTRONIC RESERVATION SLIP (ERS)</h3>
+                    <span style="font-size:11px; opacity:0.85;">Indian Railways &bull; IRCTC e-Ticketing Service</span>
+                </div>
+                <div class="ers-header-actions">
+                    <span class="hologram-seal" title="Authentic IRCTC Security Seal">IRCTC SECURE</span>
+                    <button type="button" class="modal-close-btn" onclick="closeModal('ers-modal')">&times;</button>
+                </div>
+            </div>
 
-                <!-- FRONT FACE: PASSENGER DETAILS & BOARDING PASS -->
-                <div class="ers-card-face ers-card-front">
-                    <div class="ers-header">
+            <div class="ers-body">
+                <div class="ers-watermark-stamp">
+                    <div class="ers-top-meta">
                         <div>
-                            <h3 style="font-size:16px; font-weight:800; letter-spacing:0.3px;">ELECTRONIC RESERVATION SLIP (ERS)</h3>
-                            <span style="font-size:11px; opacity:0.85;">Indian Railways &bull; IRCTC e-Ticketing Service</span>
+                            <span style="font-size:11px; color:#666; font-weight:700;">PNR NUMBER</span>
+                            <div id="ers-pnr" class="pnr-box">PNR-000000</div>
                         </div>
-                        <div class="ers-header-actions">
-                            <span class="hologram-seal" title="Authentic IRCTC Holographic Security Seal">IRCTC HOLOGRAM</span>
-                            <button type="button" class="modal-close-btn" onclick="closeModal('ers-modal')">&times;</button>
-                        </div>
-                    </div>
-
-                    <div class="ers-body">
-                        <div class="ers-watermark-stamp">
-                            <div class="ers-top-meta">
-                                <div>
-                                    <span style="font-size:11px; color:#666; font-weight:700;">PNR NUMBER</span>
-                                    <div id="ers-pnr" class="pnr-box">PNR-000000</div>
-                                </div>
-                                <div style="text-align:right;">
-                                    <span style="font-size:11px; color:#666; font-weight:700;">BOOKING STATUS</span>
-                                    <div><span id="ers-status" class="avail-status-pill available">CONFIRMED</span></div>
-                                </div>
-                            </div>
-
-                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; font-size:12px; margin-bottom:12px;">
-                                <div><strong>Train:</strong> <span id="ers-train">12007 / SHATABDI EXP</span></div>
-                                <div><strong>Class:</strong> <span id="ers-class">AC 3 TIER (3A)</span></div>
-                                <div><strong>Route:</strong> <span id="ers-route">BENGALURU ➔ CHENNAI</span></div>
-                                <div><strong>Seats:</strong> <span id="ers-seats">1 Seat(s)</span></div>
-                                <div><strong>Schedule:</strong> <span id="ers-times">06:00 AM ➔ 11:00 AM</span></div>
-                                <div><strong>Total Fare:</strong> <span id="ers-fare" style="font-weight:800; color:#213d77;">₹420.00</span></div>
-                                <div><strong>Booked On:</strong> <span id="ers-booking-time">-</span></div>
-                                <div><strong>Quota:</strong> <span id="ers-quota">GENERAL</span></div>
-                            </div>
-
-                            <table class="ers-table">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Passenger Name</th>
-                                        <th>Age</th>
-                                        <th>Category</th>
-                                        <th>Berth Allocation</th>
-                                        <th>Concession</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="ers-passenger-tbody">
-                                    <!-- Populated dynamically -->
-                                </tbody>
-                            </table>
-
-                            <div style="font-size:11px; color:#555; border-top:1px dashed #ccc; padding-top:10px; margin-top:12px; line-height:1.4;">
-                                <strong>Important Travel Advisory:</strong>
-                                1. One of the passengers booked on an e-ticket is required to present valid Original Identity Proof during the journey.<br>
-                                2. Valid for the journey specified. Educational simulation record for Alliance University Course Code: E1CSA25306.
-                            </div>
+                        <div style="text-align:right;">
+                            <span style="font-size:11px; color:#666; font-weight:700;">BOOKING STATUS</span>
+                            <div><span id="ers-status" class="avail-status-pill available">CONFIRMED</span></div>
                         </div>
                     </div>
 
-                    <div class="ers-footer-actions">
-                        <button type="button" class="btn-card-rush" style="background:#eef2f8; color:#213d77; border:1px solid #d0d7e5;" onclick="closeModal('ers-modal')">Close</button>
-                        <button type="button" class="btn-3d-flip" onclick="toggleErsFlip()">🔄 3D Flip Ticket (View Back)</button>
-                        <button type="button" class="btn-search-irctc" style="padding:8px 18px; font-size:12px;" onclick="printErsTicket()">🖨️ Print / Save Ticket</button>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; font-size:12px; margin-bottom:12px;">
+                        <div><strong>Train:</strong> <span id="ers-train">12007 / SHATABDI EXP</span></div>
+                        <div><strong>Class:</strong> <span id="ers-class">AC 3 TIER (3A)</span></div>
+                        <div><strong>Route:</strong> <span id="ers-route">BENGALURU ➔ CHENNAI</span></div>
+                        <div><strong>Seats:</strong> <span id="ers-seats">1 Seat(s)</span></div>
+                        <div><strong>Schedule:</strong> <span id="ers-times">06:00 AM ➔ 11:00 AM</span></div>
+                        <div><strong>Total Fare:</strong> <span id="ers-fare" style="font-weight:800; color:#213d77;">₹420.00</span></div>
+                        <div><strong>Booked On:</strong> <span id="ers-booking-time">-</span></div>
+                        <div><strong>Quota:</strong> <span id="ers-quota">GENERAL</span></div>
+                    </div>
+
+                    <table class="ers-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Passenger Name</th>
+                                <th>Age</th>
+                                <th>Category</th>
+                                <th>Berth Allocation</th>
+                                <th>Concession</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ers-passenger-tbody">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+
+                    <div class="ers-barcode-container" style="margin-top:14px;">
+                        <div class="barcode-strip">
+                            <div class="barcode-lines"></div>
+                            <span id="barcode-pnr-label" class="barcode-label">PNR-000000-IRCTC-SECURE</span>
+                        </div>
+                        <div class="qr-mock-box">
+                            <div class="qr-pattern"></div>
+                            <span style="font-size:9px; color:#888; margin-top:4px;">SCAN FOR TTE</span>
+                        </div>
+                    </div>
+
+                    <div style="font-size:11px; color:#555; border-top:1px dashed #ccc; padding-top:10px; margin-top:12px; line-height:1.4;">
+                        <strong>Important Travel Advisory:</strong>
+                        1. One of the passengers booked on an e-ticket is required to present valid Original Identity Proof during the journey.<br>
+                        2. Valid for the journey specified. Educational simulation record for Alliance University Course Code: E1CSA25306.
                     </div>
                 </div>
+            </div>
 
-                <!-- BACK FACE: TERMS, 3D BARCODE & ACADEMIC CERTIFICATE -->
-                <div class="ers-card-face ers-card-back">
-                    <div class="ers-header" style="background:linear-gradient(135deg, #172b53 0%, #0d1b33 100%);">
-                        <div>
-                            <h3 style="font-size:16px; font-weight:800; letter-spacing:0.3px;">TERMS &amp; SECURITY VERIFICATION</h3>
-                            <span style="font-size:11px; opacity:0.85;">Indian Railways &bull; Cryptographic E-Ticket Back</span>
-                        </div>
-                        <button type="button" class="modal-close-btn" onclick="closeModal('ers-modal')">&times;</button>
-                    </div>
-
-                    <div class="ers-body">
-                        <div class="ers-back-content">
-                            <div class="ers-barcode-container">
-                                <div class="barcode-3d-strip">
-                                    <div class="barcode-lines"></div>
-                                    <span id="barcode-pnr-label" class="barcode-label">PNR-000000-IRCTC-SECURE</span>
-                                </div>
-                                <div class="qr-mock-box">
-                                    <div class="qr-pattern"></div>
-                                    <span style="font-size:9px; color:#888; margin-top:4px;">SCAN FOR TTE</span>
-                                </div>
-                            </div>
-
-                            <div class="ers-back-terms">
-                                <h4>REFUND &amp; CANCELLATION RULES (ACADEMIC ENGINE)</h4>
-                                <ul>
-                                    <li><strong>Confirmed Tickets:</strong> ₹60 per passenger deduction for General, ₹120 for Sleeper, ₹180 for AC if cancelled before chart preparation.</li>
-                                    <li><strong>Tatkal Quota:</strong> No refund on cancellation of confirmed Tatkal tickets as per official IRCTC rules.</li>
-                                    <li><strong>Waiting List Auto-Promotion:</strong> When confirmed tickets are cancelled, highest-priority WL/TQWL passengers are auto-promoted using background daemon thread synchronization.</li>
-                                </ul>
-
-                                <div class="ers-academic-badge">
-                                    <div style="font-size:18px;">🎓</div>
-                                    <div>
-                                        <strong>Alliance University &bull; B.Tech CSE Course Code: E1CSA25306</strong><br>
-                                        <span style="font-size:10.5px; color:#555;">Programming in Java &bull; Multithreaded AI Swarm Simulation</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="ers-footer-actions">
-                        <button type="button" class="btn-3d-flip" onclick="toggleErsFlip()">🔄 3D Flip Back to Front</button>
-                        <button type="button" class="btn-card-rush" style="background:#eef2f8; color:#213d77; border:1px solid #d0d7e5;" onclick="closeModal('ers-modal')">Close</button>
-                    </div>
-                </div>
-
+            <div class="ers-footer-actions">
+                <button type="button" class="btn-card-rush" style="background:#eef2f8; color:#213d77; border:1px solid #d0d7e5;" onclick="closeModal('ers-modal')">Close</button>
+                <button type="button" class="btn-search-irctc" style="padding:8px 18px; font-size:12px;" onclick="printErsTicket()">🖨️ Print / Save Ticket</button>
             </div>
         </div>
     </div>
@@ -667,19 +622,15 @@
         </div>
     </div>
 
-    <!-- 10. ASK DISHA 2.0 FLOATING 3D HOLOGRAM ORB WIDGET -->
-    <div id="disha-trigger" class="disha-3d-orb-trigger" title="Ask DISHA 2.0 AI Assistant">
-        <div class="orb-3d-wrapper">
-            <div class="orb-ring-outer"></div>
-            <div class="orb-ring-inner"></div>
-            <div class="orb-core">
-                <span class="orb-icon">🤖</span>
-            </div>
-            <div class="orb-pulse-wave"></div>
+    <!-- 10. ASK DISHA 2.0 FLOATING VIRTUAL ASSISTANT -->
+    <div id="disha-trigger" class="disha-floating-trigger" title="Ask DISHA 2.0 AI Assistant">
+        <div class="disha-avatar-bubble">
+            <span class="disha-icon">🤖</span>
+            <span class="disha-status-dot"></span>
         </div>
         <div class="disha-trigger-text">
             <span class="disha-title">Ask DISHA 2.0</span>
-            <span class="disha-subtitle">Local 3D AI Assistant</span>
+            <span class="disha-subtitle">IRCTC Virtual Assistant</span>
         </div>
     </div>
 
