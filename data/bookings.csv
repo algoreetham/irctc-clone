@@ -1,0 +1,3 @@
+PNR,PassengerName,PassengerAge,IsSenior,TrainNumber,SeatCount,TicketClass,Fare,BookingTime,Status
+PNR-1001,Dev Patel,62,true,DEMO101,2,SLEEPER,450.00,2026-10-20T18:22:32.311586,CANCELLED
+PNR-1003,preeetham,28,false,DEMO101,1,SLEEPER,375.00,2026-10-20T18:25:48.083022,CONFIRMED
